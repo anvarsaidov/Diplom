@@ -1,0 +1,9 @@
+/* 
+  Localizable.strings
+  ShopApp
+
+  Created by AnvarSaidov on 17.08.23.
+  
+*/
+"SignIn" = "Войти";
+"SignUp" = "Регистрация";
