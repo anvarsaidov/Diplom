@@ -7,10 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		422B5CF02A8F614A00DA259D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422B5CEF2A8F614A00DA259D /* LoginViewController.swift */; };
+		422B5CF32A8F8EB700DA259D /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422B5CF22A8F8EB700DA259D /* RegistrationViewController.swift */; };
+		422B5D152A90A7A600DA259D /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422B5D142A90A7A600DA259D /* MainVC.swift */; };
+		422B5D192A90BC5F00DA259D /* BasketVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422B5D182A90BC5F00DA259D /* BasketVC.swift */; };
+		422B5D1B2A90BC7000DA259D /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422B5D1A2A90BC7000DA259D /* ProfileVC.swift */; };
 		42770C0C2A8E044800206634 /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42770C0B2A8E044800206634 /* Users.swift */; };
-		42770C102A8E08E400206634 /* WelconVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42770C0F2A8E08E400206634 /* WelconVC.swift */; };
-		42770C122A8E0DD400206634 /* TestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42770C112A8E0DD400206634 /* TestVC.swift */; };
+		42770C102A8E08E400206634 /* WelconViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42770C0F2A8E08E400206634 /* WelconViewController.swift */; };
 		42770C152A8E29B900206634 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 42770C172A8E29B900206634 /* Localizable.strings */; };
+		42A1118E2A8E64FE000A01F7 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A1118D2A8E64FE000A01F7 /* LoginVC.swift */; };
+		42A111902A8E650B000A01F7 /* RegistrationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A1118F2A8E650B000A01F7 /* RegistrationVC.swift */; };
 		42ECD7882A72F4BE007B2105 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42ECD7872A72F4BE007B2105 /* AppDelegate.swift */; };
 		42ECD78A2A72F4BE007B2105 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42ECD7892A72F4BE007B2105 /* SceneDelegate.swift */; };
 		42ECD78C2A72F4BE007B2105 /* WelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42ECD78B2A72F4BE007B2105 /* WelcomeVC.swift */; };
@@ -19,12 +25,18 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		422B5CEF2A8F614A00DA259D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		422B5CF22A8F8EB700DA259D /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		422B5D142A90A7A600DA259D /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
+		422B5D182A90BC5F00DA259D /* BasketVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketVC.swift; sourceTree = "<group>"; };
+		422B5D1A2A90BC7000DA259D /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		42770C0B2A8E044800206634 /* Users.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
-		42770C0F2A8E08E400206634 /* WelconVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelconVC.swift; sourceTree = "<group>"; };
-		42770C112A8E0DD400206634 /* TestVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVC.swift; sourceTree = "<group>"; };
+		42770C0F2A8E08E400206634 /* WelconViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelconViewController.swift; sourceTree = "<group>"; };
 		42770C162A8E29B900206634 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		42770C1A2A8E2A1600206634 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		42770C1B2A8E2A2200206634 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		42A1118D2A8E64FE000A01F7 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		42A1118F2A8E650B000A01F7 /* RegistrationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationVC.swift; sourceTree = "<group>"; };
 		42ECD7842A72F4BE007B2105 /* ShopApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShopApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42ECD7872A72F4BE007B2105 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		42ECD7892A72F4BE007B2105 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -45,6 +57,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		422B5CF12A8F628500DA259D /* Service */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		422B5D1C2A90D4B000DA259D /* Presenters */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenters;
+			sourceTree = "<group>";
+		};
 		42770C022A83E5D100206634 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
@@ -76,6 +102,7 @@
 		42770C052A83E7B900206634 /* Api */ = {
 			isa = PBXGroup;
 			children = (
+				422B5CF12A8F628500DA259D /* Service */,
 				42770C0D2A8E05DB00206634 /* Models */,
 			);
 			path = Api;
@@ -92,7 +119,11 @@
 			isa = PBXGroup;
 			children = (
 				42ECD78B2A72F4BE007B2105 /* WelcomeVC.swift */,
-				42770C112A8E0DD400206634 /* TestVC.swift */,
+				42A1118D2A8E64FE000A01F7 /* LoginVC.swift */,
+				42A1118F2A8E650B000A01F7 /* RegistrationVC.swift */,
+				422B5D142A90A7A600DA259D /* MainVC.swift */,
+				422B5D182A90BC5F00DA259D /* BasketVC.swift */,
+				422B5D1A2A90BC7000DA259D /* ProfileVC.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -108,7 +139,9 @@
 		42770C0E2A8E08C700206634 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				42770C0F2A8E08E400206634 /* WelconVC.swift */,
+				42770C0F2A8E08E400206634 /* WelconViewController.swift */,
+				422B5CEF2A8F614A00DA259D /* LoginViewController.swift */,
+				422B5CF22A8F8EB700DA259D /* RegistrationViewController.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -132,8 +165,9 @@
 		42ECD7862A72F4BE007B2105 /* ShopApp */ = {
 			isa = PBXGroup;
 			children = (
-				42770C0A2A8E042800206634 /* Views */,
 				42770C092A8E042000206634 /* Models */,
+				42770C0A2A8E042800206634 /* Views */,
+				422B5D1C2A90D4B000DA259D /* Presenters */,
 				42770C052A83E7B900206634 /* Api */,
 				42770C042A83E7B400206634 /* Core */,
 				42770C032A83E5E200206634 /* App */,
@@ -214,11 +248,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				42770C102A8E08E400206634 /* WelconVC.swift in Sources */,
+				422B5D1B2A90BC7000DA259D /* ProfileVC.swift in Sources */,
+				422B5D152A90A7A600DA259D /* MainVC.swift in Sources */,
+				42A111902A8E650B000A01F7 /* RegistrationVC.swift in Sources */,
+				422B5D192A90BC5F00DA259D /* BasketVC.swift in Sources */,
+				42770C102A8E08E400206634 /* WelconViewController.swift in Sources */,
 				42770C0C2A8E044800206634 /* Users.swift in Sources */,
+				422B5CF32A8F8EB700DA259D /* RegistrationViewController.swift in Sources */,
+				42A1118E2A8E64FE000A01F7 /* LoginVC.swift in Sources */,
 				42ECD78C2A72F4BE007B2105 /* WelcomeVC.swift in Sources */,
+				422B5CF02A8F614A00DA259D /* LoginViewController.swift in Sources */,
 				42ECD7882A72F4BE007B2105 /* AppDelegate.swift in Sources */,
-				42770C122A8E0DD400206634 /* TestVC.swift in Sources */,
 				42ECD78A2A72F4BE007B2105 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -375,8 +415,8 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -402,8 +442,8 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

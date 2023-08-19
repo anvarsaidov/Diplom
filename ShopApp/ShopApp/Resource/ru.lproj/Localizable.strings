@@ -7,3 +7,18 @@
 */
 "SignIn" = "Войти";
 "SignUp" = "Регистрация";
+"UserName" = "Имя пользователя";
+"Password" = "Пароль";
+"Cancel" = "Отмена";
+"InfoLogin" = "Авторизация";
+"InfoRegistration" = "Регистрация";
+"Remember" = "Запомнить";
+"FirstName" = "Имя";
+"LastName" = "Фамилия";
+"City" = "Город";
+"Street" = "Улица";
+"Number" = "Номер дома";
+"Phone" = "Телефон";
+"Main" = "Главная";
+"Basket" = "Корзина";
+"Profile" = "Профиль";

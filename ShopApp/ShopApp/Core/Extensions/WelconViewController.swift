@@ -37,8 +37,7 @@ extension WelcomeVC {
             button.addTarget(nil, action: #selector(signInOnClick), for: .touchUpInside)
             
             return button
-        }()
-        
+        }()        
         
         // MARK: - signUpButton
         let signUpButton: UIButton = {
@@ -58,7 +57,7 @@ extension WelcomeVC {
         viewContainer.addSubview(signInButton)
         viewContainer.addSubview(signUpButton)
         
-        // MARK: - Ограничения для viewCintainer
+        // MARK: - Ограничения для viewContainer
         NSLayoutConstraint.activate([
             viewContainer.widthAnchor.constraint(equalToConstant: 300),
             viewContainer.heightAnchor.constraint(equalToConstant: 300),
@@ -86,12 +85,16 @@ extension WelcomeVC {
     
     @objc
     private func signInOnClick() {
-        print(NSLocalizedString("SignIn", comment: ""))
+        guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else { return }
+        sceneDelegate.window?.rootViewController = LoginVC()
+        sceneDelegate.window?.makeKeyAndVisible()
     }
     
     @objc
     private func signUpOnClick() {
-        print(NSLocalizedString("SignUp", comment: ""))
+        guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else { return }
+        sceneDelegate.window?.rootViewController = RegistrationVC()
+        sceneDelegate.window?.makeKeyAndVisible()
     }
     
     
