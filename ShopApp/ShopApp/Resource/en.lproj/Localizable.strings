@@ -13,5 +13,7 @@
 "Number" = "Number";
 "Phone" = "Phone";
 "Main" = "Home";
-"Basket" = "Basket";
+"Cart" = "Cart";
 "Profile" = "Profile";
+"Exit" = "Exit";
+"Add" = "Add to cart";

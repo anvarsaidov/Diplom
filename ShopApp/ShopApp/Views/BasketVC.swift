@@ -9,14 +9,11 @@ import UIKit
 
 class BasketVC: UIViewController {
     
-    let imageFon = UIImageView(image: UIImage(named: "welcomeImage"))
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.addSubview(imageFon)
-        self.title = NSLocalizedString("Basket", comment: "")
+        self.title = NSLocalizedString("Cart", comment: "")
         self.view.backgroundColor = .white
-        self.tabBarItem = UITabBarItem(title: NSLocalizedString("Basket", comment: ""), image: UIImage(systemName: "cart"), tag: 1)
         
     }
 

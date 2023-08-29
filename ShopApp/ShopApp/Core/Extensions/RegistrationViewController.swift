@@ -29,7 +29,11 @@ extension RegistrationVC: UITextFieldDelegate {
             numberTF.becomeFirstResponder()
             
         case numberTF:
+            phoneTF.becomeFirstResponder()
+            
+        case phoneTF:
             phoneTF.resignFirstResponder()
+            
             
         default:
             break
@@ -57,7 +61,14 @@ extension RegistrationVC {
         viewContainer.addSubview(cancelButton)
         
         buildVC()
+        
+        [userNameTF, passwordTF, firstNameTF, lastNameTF, cityTF, streetTF, numberTF, phoneTF].forEach {
+            $0?.delegate = self
+        }
+        
         registerForKeyboardNotifications()
+        
+        
     }
     
     private func buildVC() {

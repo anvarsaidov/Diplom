@@ -9,45 +9,23 @@ import UIKit
 
 class MainVC: UIViewController {
     
-    let imageFon = UIImageView(image: UIImage(named: "welcomeImage"))
-//    let searchTF = UITextField()
-//    let viewContainer = UITextField()
-//    let tableView = UITableView()
+    lazy var searchBar = UISearchBar()
+    lazy var tableView = UITableView()
+    let indentifireCell = "TableCell"
+    
+    lazy var api = ApiService()
+    var products = Product()
+    
+    lazy var categories = Categories()
+    lazy var arrImage: [UIImage] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //setupVC()
-        self.view.addSubview(imageFon)
         self.title = NSLocalizedString("Main", comment: "")
-        self.tabBarItem = UITabBarItem(title: NSLocalizedString("Main", comment: ""), image: UIImage(systemName: "homekit"), tag: 0)
-        self.view.backgroundColor = .purple
+        self.view.backgroundColor = .white
         
-        
+        setup()
     }
 }
 
-//extension MainVC {
-//
-//    func setupVC() {
-//        buildVC()
-//    }
-//
-//    private func buildVC() {
-//    }
-//
-//    private func configureSearchTF() {
-//
-//    }
-//
-//    private func configureViewContainer() {
-//
-//    }
-//
-//    private func configureTableView() {
-//
-//    }
-//
-//    private func configureTabBar() {
-//
-//    }
-//}
+
