@@ -11,7 +11,7 @@ extension MainVC: UITableViewDataSource {
     
     // MARK: - Задаем количество строк
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        arrImage.count
+        products.count
     }
     
     // MARK: - Наполняем таблицу данными
@@ -20,11 +20,11 @@ extension MainVC: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: indentifireCell, for: indexPath) as? TableCell else {
             return UITableViewCell()
         }
-        
-        cell.image.image = arrImage[row]
+        let image = !arrImage.isEmpty ? arrImage[row] : UIImage(systemName: "network")
+        cell.image.image = image
         cell.titleLabel.text = products[row].title
         cell.descriptionLabel.text = products[row].description
-        cell.priceLabel.text = "\(String(format: "%.2f", products[row].price)) $"
+        cell.priceLabel.text = products[row].price.format(f: "2") //"\(String(format: "%.2f", products[row].price)) $"
         
         return cell
     }

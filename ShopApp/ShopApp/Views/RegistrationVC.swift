@@ -17,14 +17,13 @@ class RegistrationVC: UIViewController {
     let passwordTF = UITextField()
     let firstNameTF = UITextField()
     let lastNameTF = UITextField()
-    let cityTF = UITextField()
-    let streetTF = UITextField()
-    let numberTF = UITextField()
-    let phoneTF = UITextField()
+    let mailTF = UITextField()
     let signUpButton = UIButton()
     let cancelButton = UIButton()
     
     let spacingTop: CGFloat = 12
+    
+    var viewModel = UserViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +33,4 @@ class RegistrationVC: UIViewController {
     deinit {
         removeKeyboardNotifications()
     }
-    
 }
-
-

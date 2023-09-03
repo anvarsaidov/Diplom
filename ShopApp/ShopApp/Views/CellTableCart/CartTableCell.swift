@@ -1,20 +1,19 @@
 //
-//  TableCell.swift
+//  CartTableCell.swift
 //  ShopApp
 //
-//  Created by AnvarSaidov on 24.08.23.
+//  Created by AnvarSaidov on 30.08.23.
 //
 
 import UIKit
 
-class TableCell: UITableViewCell {
+class CartTableCell: UITableViewCell {
     
     let view = UIView()
     let image = UIImageView()
     let titleLabel = UILabel()
     let descriptionLabel = UILabel()
     let priceLabel = UILabel()
-    let addProductCart = UIButton()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -29,4 +28,3 @@ class TableCell: UITableViewCell {
     }
     
 }
-

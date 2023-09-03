@@ -25,6 +25,10 @@ extension ProfileVC {
         // MARK: - Конфигурирование объекта EmailLabel
         configureEmailLabel()
         
+        configureUpdateButton()
+        
+        configureHistoryButton()
+        
         // MARK: - Конфигурирование объекта ExitButton
         configureExitButton()
         
@@ -33,6 +37,7 @@ extension ProfileVC {
         
         // MARK: - Конфигурирование объекта SignInButton
         configureSignInButton()
+        
     }
     
     private func configureViewContainer() {
@@ -57,7 +62,6 @@ extension ProfileVC {
     private func configureFirstNameLabel() {
         firstNameLabel.font = UIFont.boldSystemFont(ofSize: textSize)
         firstNameLabel.textAlignment = .center
-        firstNameLabel.text = "FirstName"
         firstNameLabel.translatesAutoresizingMaskIntoConstraints = false
         viewContainer.addSubview(firstNameLabel)
         addConstraintsFirstNameLabel()
@@ -76,7 +80,6 @@ extension ProfileVC {
     private func configureLastNameLabel() {
         lastNameLabel.font = UIFont.boldSystemFont(ofSize: textSize)
         lastNameLabel.textAlignment = .center
-        lastNameLabel.text = "LastName"
         lastNameLabel.translatesAutoresizingMaskIntoConstraints = false
         viewContainer.addSubview(lastNameLabel)
         addConstraintsLastNameLabel()
@@ -95,12 +98,11 @@ extension ProfileVC {
     private func configureEmailLabel() {
         emailLabel.font = UIFont.boldSystemFont(ofSize: textSize)
         emailLabel.textAlignment = .center
-        emailLabel.text = "Email"
         emailLabel.translatesAutoresizingMaskIntoConstraints = false
         viewContainer.addSubview(emailLabel)
         addConstraintsEmailLabel()
     }
-    
+
     // MARK: - Установка ограничений для объекта EmailLabel
     private func addConstraintsEmailLabel() {
         NSLayoutConstraint.activate([
@@ -111,13 +113,52 @@ extension ProfileVC {
         ])
     }
     
+    private func configureUpdateButton() {
+        updateButton.layer.cornerRadius = 10
+        updateButton.backgroundColor = .red
+        updateButton.setTitle(NSLocalizedString("UpdateButton", comment: ""), for: .normal)
+        updateButton.setTitleColor(.black, for: .normal)
+        updateButton.translatesAutoresizingMaskIntoConstraints = false
+        updateButton.addTarget(nil, action: #selector(updateOnClick), for: .touchUpInside)
+        
+        viewContainer.addSubview(updateButton)
+        addConstraintsUpdateButton()
+    }
+    
+    private func addConstraintsUpdateButton() {
+        NSLayoutConstraint.activate([
+            updateButton.topAnchor.constraint(equalTo: emailLabel.bottomAnchor, constant: 32),
+            updateButton.widthAnchor.constraint(equalTo: viewContainer.widthAnchor, multiplier: 0.5),
+            updateButton.centerXAnchor.constraint(equalTo: viewContainer.centerXAnchor)
+        ])
+    }
+    
+    private func configureHistoryButton() {
+        historyButton.layer.cornerRadius = 10
+        historyButton.backgroundColor = .red
+        historyButton.setTitle(NSLocalizedString("HistoryButton", comment: ""), for: .normal)
+        historyButton.setTitleColor(.black, for: .normal)
+        historyButton.translatesAutoresizingMaskIntoConstraints = false
+        historyButton.addTarget(nil, action: #selector(historyOnClick), for: .touchUpInside)
+        
+        viewContainer.addSubview(historyButton)
+        addConstraintsHistoryButton()
+    }
+    
+    private func addConstraintsHistoryButton() {
+        NSLayoutConstraint.activate([
+            historyButton.topAnchor.constraint(equalTo: updateButton.bottomAnchor, constant: 16),
+            historyButton.widthAnchor.constraint(equalTo: viewContainer.widthAnchor, multiplier: 0.5),
+            historyButton.centerXAnchor.constraint(equalTo: viewContainer.centerXAnchor)
+        ])
+    }
+    
     private func configureSignInButton() {
         signInButton.layer.cornerRadius = 10
         signInButton.backgroundColor = .red
         signInButton.setTitle(NSLocalizedString("SignIn", comment: ""), for: .normal)
         signInButton.setTitleColor(.black, for: .normal)
         signInButton.translatesAutoresizingMaskIntoConstraints = false
-        
         signInButton.addTarget(nil, action: #selector(signInOnClick), for: .touchUpInside)
         
         viewContainer.addSubview(signInButton)
@@ -139,10 +180,8 @@ extension ProfileVC {
         signUpButton.setTitle(NSLocalizedString("SignUp", comment: ""), for: .normal)
         signUpButton.setTitleColor(.black, for: .normal)
         signUpButton.translatesAutoresizingMaskIntoConstraints = false
-        
         signUpButton.addTarget(nil, action: #selector(signUpOnClick), for: .touchUpInside)
         viewContainer.addSubview(signUpButton)
-        
         addConstraintsSignUpButton()
     }
     
@@ -161,7 +200,7 @@ extension ProfileVC {
         exitButton.setTitle(NSLocalizedString("Exit", comment: ""), for: .normal)
         exitButton.setTitleColor(.black, for: .normal)
         exitButton.translatesAutoresizingMaskIntoConstraints = false
-        
+        exitButton.isHidden = true
         exitButton.addTarget(nil, action: #selector(exitOnClick), for: .touchUpInside)
         viewContainer.addSubview(exitButton)
         addConstraintsExitButton()
@@ -176,22 +215,58 @@ extension ProfileVC {
         ])
     }
     
+    // MARK: - Обновление вью после логина\выход из акаунта
+    func update() {
+        if !viewModel.users.isEmpty && viewModel.isLogged {
+            firstNameLabel.text = viewModel.users[viewModel.idUser].firstName
+            lastNameLabel.text = viewModel.users[viewModel.idUser].lastName
+            emailLabel.text = viewModel.users[viewModel.idUser].email
+            signInButton.isHidden = true
+            signUpButton.isHidden = true
+            updateButton.isHidden = false
+            historyButton.isHidden = false
+            exitButton.isHidden = false
+        } else {
+            firstNameLabel.text = ""
+            lastNameLabel.text = ""
+            emailLabel.text = ""
+            updateButton.isHidden = true
+            historyButton.isHidden = true
+            signInButton.isHidden = false
+            signUpButton.isHidden = false
+            exitButton.isHidden = true
+        }
+    }
+    
+    // MARK: - Actions Button
     @objc
     private func signInOnClick() {
-        guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else { return }
-        sceneDelegate.window?.rootViewController = LoginVC()
-        sceneDelegate.window?.makeKeyAndVisible()
+        let vc = LoginVC()
+        vc.viewModel = self.viewModel
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc
     private func signUpOnClick() {
-        guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else { return }
-        sceneDelegate.window?.rootViewController = RegistrationVC()
-        sceneDelegate.window?.makeKeyAndVisible()
+        let vc = RegistrationVC()
+        vc.viewModel = self.viewModel
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc
     private func exitOnClick() {
+        print(viewModel.isLogged)
+        viewModel.logout()
+        update()
+    }
+    
+    @objc
+    private func updateOnClick() {
+        print(#function)
+    }
+    
+    @objc
+    private func historyOnClick() {
         print(#function)
     }
 }

@@ -15,7 +15,7 @@
 "Remember" = "Запомнить";
 "FirstName" = "Имя";
 "LastName" = "Фамилия";
-"City" = "Город";
+"Mail" = "Электронная почта";
 "Street" = "Улица";
 "Number" = "Номер дома";
 "Phone" = "Телефон";
@@ -23,4 +23,10 @@
 "Cart" = "Корзина";
 "Profile" = "Профиль";
 "Exit" = "Выход";
-"Add" = "Дабавить";
+"Add" = " В корзину";
+"titleAlertLogIn" = "Сообщение";
+"msgAlertLogInNo" = "Пользователь не найден";
+"msgAlertLogIn" = "Успешно";
+"Ok" = "Ок";
+"UpdateButton" = "Редактировать";
+"HistoryButton" = "История покупок";

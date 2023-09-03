@@ -132,7 +132,7 @@ extension ProductInfoVC {
         priceProduct.font = UIFont.boldSystemFont(ofSize: textSize)
         priceProduct.textAlignment = .center
         if let price = productItem.first?.price {
-            priceProduct.text = "\(String(format: "%.2f", price)) $"
+            priceProduct.text = price.format(f: "2")//"\(String(format: "%.2f", price)) $"
         } else {
             priceProduct.text = "0 $"
         }

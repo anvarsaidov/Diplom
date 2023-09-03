@@ -20,10 +20,18 @@ class ProfileVC: UIViewController {
     lazy var signInButton = UIButton()
     lazy var signUpButton = UIButton()
     lazy var exitButton = UIButton()
+    lazy var updateButton = UIButton()
+    lazy var historyButton = UIButton()
 
+    var viewModel = UserViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        update()
     }
 }

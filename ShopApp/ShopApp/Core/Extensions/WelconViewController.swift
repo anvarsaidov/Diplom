@@ -9,6 +9,8 @@ import UIKit
 
 extension WelcomeVC {
     func builderVC() {
+        let navController = UINavigationController(rootViewController: WelcomeVC())
+        
         // MARK: - imageFon
         let imageFon: UIImageView = {
             let imageView = UIImageView(image: UIImage(named: "welcomeImage"))
@@ -82,20 +84,20 @@ extension WelcomeVC {
         ])
     }
     
-    
+    // MARK: - Actions
     @objc
     private func signInOnClick() {
-        guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else { return }
-        sceneDelegate.window?.rootViewController = LoginVC()
-        sceneDelegate.window?.makeKeyAndVisible()
+//        guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else { return }
+//        sceneDelegate.window?.rootViewController = LoginVC()
+//        sceneDelegate.window?.makeKeyAndVisible()
+        self.navigationController?.pushViewController(LoginVC(), animated: true)
     }
     
     @objc
     private func signUpOnClick() {
-        guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else { return }
-        sceneDelegate.window?.rootViewController = RegistrationVC()
-        sceneDelegate.window?.makeKeyAndVisible()
+//        guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else { return }
+//        sceneDelegate.window?.rootViewController = RegistrationVC()
+//        sceneDelegate.window?.makeKeyAndVisible()
+        self.navigationController?.pushViewController(RegistrationVC(), animated: true)
     }
-    
-    
 }

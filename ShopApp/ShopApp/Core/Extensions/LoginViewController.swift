@@ -7,22 +7,6 @@
 
 import UIKit
 
-extension LoginVC: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        switch textField {
-        case nameTF:
-            passwordTF.becomeFirstResponder()
-            
-        case passwordTF:
-            passwordTF.resignFirstResponder()
-            
-        default:
-            break
-        }
-        return true
-    }
-}
-
 extension LoginVC {
     
     func configureVC() {
@@ -37,6 +21,7 @@ extension LoginVC {
         viewContainer.addSubview(rememberLabel)
         viewContainer.addSubview(signInButton)
         viewContainer.addSubview(cancelButton)
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapGesture)))
         
         [nameTF, passwordTF].forEach {
             $0?.delegate = self
@@ -73,7 +58,6 @@ extension LoginVC {
         
         // MARK: - Создание кнопки "Отмена (Вернуться на предыдущее окно"
         makeCancelButton()
-        
     }
     
     private func makeScrollView() {
@@ -148,6 +132,10 @@ extension LoginVC {
         passwordTF.placeholder = NSLocalizedString("Password", comment: "")
         passwordTF.returnKeyType = .done
         passwordTF.borderStyle = .roundedRect
+        passwordTF.isSecureTextEntry = true
+        passwordTF.autocorrectionType = .no
+        passwordTF.textContentType = .oneTimeCode
+        passwordTF.keyboardType = .default
         passwordTF.translatesAutoresizingMaskIntoConstraints = false
         addConstraintsPasswordTF()
     }
@@ -224,34 +212,24 @@ extension LoginVC {
         ])
     }
     
-    @objc
-    private func signInOnClick() {
-        configureTabBarController()
-    }
-    
-    @objc
-    private func cancelOnClick() {
-        
-    }
-    
-    private func configureTabBarController() {
-        guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else { return }
-        
-        let main = MainVC()
-        let basket = BasketVC()
-        let profile = ProfileVC()
-        
-        let mainNavController = UINavigationController(rootViewController: main)
-        let basketNavController = UINavigationController(rootViewController: basket)
-        let profileNavController = UINavigationController(rootViewController: profile)
-        
-        let tabBar = UITabBarController()
-        tabBar.setViewControllers([mainNavController, basketNavController, profileNavController], animated: true)
-        
-        
-        sceneDelegate.window?.rootViewController = tabBar
-        sceneDelegate.window?.makeKeyAndVisible()
-    }
+//    private func configureTabBarController(idUser: Int) {
+//        let main = MainVC()
+//        let basket = BasketVC()
+//        let profile = ProfileVC()
+//
+//        let mainNavController = UINavigationController(rootViewController: main)
+//        let basketNavController = UINavigationController(rootViewController: basket)
+//        let profileNavController = UINavigationController(rootViewController: profile)
+//
+//        let tabBar = UITabBarController()
+//        tabBar.setViewControllers([mainNavController, basketNavController, profileNavController], animated: true)
+//
+//        tabBar.viewControllers?[0].tabBarItem = UITabBarItem(title: NSLocalizedString("Main", comment: ""), image: UIImage(systemName: "homekit"), tag: 0)
+//        tabBar.viewControllers?[1].tabBarItem = UITabBarItem(title: NSLocalizedString("Cart", comment: ""), image: UIImage(systemName: "cart"), tag: 1)
+//        tabBar.viewControllers?[2].tabBarItem = UITabBarItem(title: NSLocalizedString("Profile", comment: ""), image: UIImage(systemName: "person.crop.square"), tag: 2)
+//
+//        self.navigationController?.pushViewController(tabBar, animated: true)
+//    }
     
     func registerForKeyboardNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(kbWillShow), name: NSNotification.Name(UIResponder.keyboardWillShowNotification.rawValue), object: nil)
@@ -261,6 +239,39 @@ extension LoginVC {
     func removeKeyboardNotifications() {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    // MARK: - Actions
+    
+    @objc
+    private func signInOnClick() {
+//        configureTabBarController()
+        guard let name = nameTF.text else { return }
+        guard let password = passwordTF.text else { return }
+        
+        let (isLogIn, id) = viewModel.logIn(userName: name, password: password)
+        if isLogIn {
+            let alert = UIAlertController(title: NSLocalizedString("titleAlertLogIn", comment: ""), message: NSLocalizedString("msgAlertLogIn", comment: ""), preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default, handler: { _ in
+                guard let vc = self.navigationController?.viewControllers.first as? ProfileVC else { return }
+                vc.viewModel = self.viewModel
+                vc.signInButton.isHidden = true
+                vc.signUpButton.isHidden = true
+                vc.exitButton.isHidden = false
+                self.navigationController?.viewControllers = [vc]
+            }))
+            self.present(alert, animated: true)
+            
+        } else {
+            let alert = UIAlertController(title: NSLocalizedString("titleAlertLogIn", comment: ""), message: NSLocalizedString("msgAlertLogInNo", comment: ""), preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .default))
+            self.present(alert, animated: true)
+        }
+    }
+    
+    @objc
+    private func cancelOnClick() {
+        navigationController?.popViewController(animated: true)
     }
     
     @objc
@@ -282,5 +293,11 @@ extension LoginVC {
         UIView.animate(withDuration: 0.3, delay: 0) {
             self.scrollView.contentOffset = CGPoint.zero
         }
+    }
+    
+    @objc
+    private func tapGesture() {
+        nameTF.resignFirstResponder()
+        passwordTF.resignFirstResponder()
     }
 }

@@ -8,7 +8,7 @@
 "Remember" = "Remember";
 "FirstName" = "FirstName";
 "LastName" = "LastName";
-"City" = "City";
+"Mail" = "mail";
 "Street" = "Street";
 "Number" = "Number";
 "Phone" = "Phone";
@@ -16,4 +16,11 @@
 "Cart" = "Cart";
 "Profile" = "Profile";
 "Exit" = "Exit";
-"Add" = "Add to cart";
+"Add" = " Add to cart";
+"titleAlertLogIn" = "Message";
+"msgAlertLogInNo" = "User not found.";
+"msgAlertLogIn" = "Successfully";
+"Ok" = "Ok";
+"UpdateButton" = "Edit user";
+"HistoryButton" = "Purchase history";
+

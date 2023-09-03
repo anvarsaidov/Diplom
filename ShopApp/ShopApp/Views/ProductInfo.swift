@@ -17,11 +17,12 @@ class ProductInfoVC: UIViewController {
     let priceProduct = UILabel()
     let raitingProduct = UILabel()
     let addCartProduct = UIButton()
+    let countQauntityLabel = UILabel()
     
     lazy var productItem: Product = []
     lazy var image = UIImage()
     
-    let textSize: CGFloat = 18
+    let textSize: CGFloat = 18  // размер текста
     
     override func viewDidLoad() {
         super.viewDidLoad()

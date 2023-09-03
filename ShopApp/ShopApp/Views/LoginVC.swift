@@ -20,6 +20,8 @@ class LoginVC: UIViewController {
     let signInButton = UIButton()
     let cancelButton = UIButton()
     
+    var viewModel = UserViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureVC()

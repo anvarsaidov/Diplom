@@ -7,42 +7,6 @@
 
 import UIKit
 
-extension RegistrationVC: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        switch textField {
-        case userNameTF:
-            passwordTF.becomeFirstResponder()
-            
-        case passwordTF:
-            firstNameTF.becomeFirstResponder()
-            
-        case firstNameTF:
-            lastNameTF.becomeFirstResponder()
-            
-        case lastNameTF:
-            cityTF.becomeFirstResponder()
-            
-        case cityTF:
-            streetTF.becomeFirstResponder()
-            
-        case streetTF:
-            numberTF.becomeFirstResponder()
-            
-        case numberTF:
-            phoneTF.becomeFirstResponder()
-            
-        case phoneTF:
-            phoneTF.resignFirstResponder()
-            
-            
-        default:
-            break
-        }
-        return true
-    }
-}
-
-
 extension RegistrationVC {
     func setupVC() {
         self.view.addSubview(imageFon)
@@ -53,21 +17,19 @@ extension RegistrationVC {
         viewContainer.addSubview(passwordTF)
         viewContainer.addSubview(firstNameTF)
         viewContainer.addSubview(lastNameTF)
-        viewContainer.addSubview(cityTF)
-        viewContainer.addSubview(streetTF)
-        viewContainer.addSubview(numberTF)
-        viewContainer.addSubview(phoneTF)
+        viewContainer.addSubview(mailTF)
         viewContainer.addSubview(signUpButton)
         viewContainer.addSubview(cancelButton)
         
         buildVC()
         
-        [userNameTF, passwordTF, firstNameTF, lastNameTF, cityTF, streetTF, numberTF, phoneTF].forEach {
+        [userNameTF, passwordTF].forEach {
             $0?.delegate = self
         }
         
         registerForKeyboardNotifications()
         
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapGesture)))
         
     }
     
@@ -89,21 +51,12 @@ extension RegistrationVC {
         
         // MARK: - Конфигурирование объекта firstNameTF
         configureFirstNameTF()
-        
-        // MARK: - Конфигурирование объекта lastNameTF
+//
+//        // MARK: - Конфигурирование объекта lastNameTF
         configureLastNameTF()
-        
-        // MARK: - Конфигурирование объекта cityTF
-        configureCityTF()
-        
-        // MARK: - Конфигурирование объекта streetTF
-        configureStreetTF()
-        
-        // MARK: - Конфигурирование объекта numberTF
-        configureNumberTF()
-        
-        // MARK: - Конфигурирование объекта phoneTF
-        configurePhoneTF()
+
+//        // MARK: - Конфигурирование объекта mailTF
+        configureMailTF()
         
         // MARK: - Конфигурирование объекта signUpButton
         configureSignUpButton()
@@ -184,6 +137,10 @@ extension RegistrationVC {
         passwordTF.placeholder = NSLocalizedString("Password", comment: "")
         passwordTF.returnKeyType = .done
         passwordTF.borderStyle = .roundedRect
+        passwordTF.isSecureTextEntry = true
+        passwordTF.autocorrectionType = .no
+        passwordTF.textContentType = .oneTimeCode
+        passwordTF.keyboardType = .default
         passwordTF.translatesAutoresizingMaskIntoConstraints = false
         addConstraintsPasswordTF()
     }
@@ -201,97 +158,52 @@ extension RegistrationVC {
         firstNameTF.returnKeyType = .continue
         firstNameTF.translatesAutoresizingMaskIntoConstraints = false
         firstNameTF.borderStyle = .roundedRect
+        firstNameTF.keyboardType = .default
         addConstraintsFirstName()
     }
-    
+
     private func addConstraintsFirstName() {
         NSLayoutConstraint.activate([
-            firstNameTF.widthAnchor.constraint(equalTo: viewContainer.widthAnchor, multiplier: 0.4),
+            firstNameTF.widthAnchor.constraint(equalTo: viewContainer.widthAnchor, multiplier: 0.9),
             firstNameTF.topAnchor.constraint(equalTo: passwordTF.bottomAnchor, constant: spacingTop),
-            firstNameTF.leadingAnchor.constraint(equalTo: passwordTF.leadingAnchor, constant: 0)
+            firstNameTF.centerXAnchor.constraint(equalTo: viewContainer.centerXAnchor)
         ])
     }
-    
+
     private func configureLastNameTF() {
         lastNameTF.placeholder = NSLocalizedString("LastName", comment: "")
         lastNameTF.returnKeyType = .continue
         lastNameTF.translatesAutoresizingMaskIntoConstraints = false
         lastNameTF.borderStyle = .roundedRect
+        lastNameTF.keyboardType = .default
         addConstraintsLastName()
     }
-    
+
     private func addConstraintsLastName() {
         NSLayoutConstraint.activate([
-            lastNameTF.widthAnchor.constraint(equalTo: viewContainer.widthAnchor, multiplier: 0.4),
-            lastNameTF.topAnchor.constraint(equalTo: passwordTF.bottomAnchor, constant: spacingTop),
-            lastNameTF.trailingAnchor.constraint(equalTo: passwordTF.trailingAnchor, constant: 0)
+            lastNameTF.widthAnchor.constraint(equalTo: viewContainer.widthAnchor, multiplier: 0.9),
+            lastNameTF.topAnchor.constraint(equalTo: firstNameTF.bottomAnchor, constant: spacingTop),
+            lastNameTF.centerXAnchor.constraint(equalTo: viewContainer.centerXAnchor)
         ])
     }
-    
-    private func configureCityTF() {
-        cityTF.placeholder = NSLocalizedString("City", comment: "")
-        cityTF.returnKeyType = .continue
-        cityTF.translatesAutoresizingMaskIntoConstraints = false
-        cityTF.borderStyle = .roundedRect
-        addConstraintsCity()
+
+    private func configureMailTF() {
+        mailTF.placeholder = NSLocalizedString("Mail", comment: "")
+        mailTF.returnKeyType = .continue
+        mailTF.translatesAutoresizingMaskIntoConstraints = false
+        mailTF.borderStyle = .roundedRect
+        mailTF.keyboardType = .emailAddress
+        addConstraintsMail()
     }
-    
-    private func addConstraintsCity() {
+
+    private func addConstraintsMail() {
         NSLayoutConstraint.activate([
-            cityTF.topAnchor.constraint(equalTo: firstNameTF.bottomAnchor, constant: spacingTop),
-            cityTF.centerXAnchor.constraint(equalTo: viewContainer.centerXAnchor),
-            cityTF.widthAnchor.constraint(equalTo: viewContainer.widthAnchor, multiplier: 0.9)
+            mailTF.topAnchor.constraint(equalTo: lastNameTF.bottomAnchor, constant: spacingTop),
+            mailTF.centerXAnchor.constraint(equalTo: viewContainer.centerXAnchor),
+            mailTF.widthAnchor.constraint(equalTo: viewContainer.widthAnchor, multiplier: 0.9)
         ])
     }
-    
-    private func configureStreetTF() {
-        streetTF.placeholder = NSLocalizedString("Street", comment: "")
-        streetTF.returnKeyType = .continue
-        streetTF.translatesAutoresizingMaskIntoConstraints = false
-        streetTF.borderStyle = .roundedRect
-        addConstraintsStreet()
-    }
-    
-    private func addConstraintsStreet() {
-        NSLayoutConstraint.activate([
-            streetTF.topAnchor.constraint(equalTo: cityTF.bottomAnchor, constant: spacingTop),
-            streetTF.centerXAnchor.constraint(equalTo: viewContainer.centerXAnchor),
-            streetTF.widthAnchor.constraint(equalTo: viewContainer.widthAnchor, multiplier: 0.9)
-        ])
-    }
-    
-    private func configureNumberTF() {
-        numberTF.placeholder = NSLocalizedString("Number", comment: "")
-        numberTF.returnKeyType = .continue
-        numberTF.translatesAutoresizingMaskIntoConstraints = false
-        numberTF.borderStyle = .roundedRect
-        addConstraintsNumber()
-    }
-    
-    private func addConstraintsNumber() {
-        NSLayoutConstraint.activate([
-            numberTF.topAnchor.constraint(equalTo: streetTF.bottomAnchor, constant: spacingTop),
-            numberTF.centerXAnchor.constraint(equalTo: viewContainer.centerXAnchor),
-            numberTF.widthAnchor.constraint(equalTo: viewContainer.widthAnchor, multiplier: 0.9)
-        ])
-    }
-    
-    private func configurePhoneTF() {
-        phoneTF.placeholder = NSLocalizedString("Phone", comment: "")
-        phoneTF.returnKeyType = .continue
-        phoneTF.translatesAutoresizingMaskIntoConstraints = false
-        phoneTF.borderStyle = .roundedRect
-        addConstraintsPhone()
-    }
-    
-    private func addConstraintsPhone() {
-        NSLayoutConstraint.activate([
-            phoneTF.topAnchor.constraint(equalTo: numberTF.bottomAnchor, constant: spacingTop),
-            phoneTF.centerXAnchor.constraint(equalTo: viewContainer.centerXAnchor),
-            phoneTF.widthAnchor.constraint(equalTo: viewContainer.widthAnchor, multiplier: 0.9)
-        ])
-    }
-    
+
     private func configureSignUpButton() {
         signUpButton.backgroundColor = .lightGray
         signUpButton.layer.cornerRadius = 15
@@ -301,15 +213,15 @@ extension RegistrationVC {
         signUpButton.translatesAutoresizingMaskIntoConstraints = false
         addConstraintsSignUpButton()
     }
-    
+
     private func addConstraintsSignUpButton() {
         NSLayoutConstraint.activate([
-            signUpButton.topAnchor.constraint(equalTo: phoneTF.bottomAnchor, constant: spacingTop),
+            signUpButton.topAnchor.constraint(equalTo: mailTF.bottomAnchor, constant: spacingTop),
             signUpButton.trailingAnchor.constraint(equalTo: viewContainer.trailingAnchor, constant:  -8),
             signUpButton.widthAnchor.constraint(equalTo: viewContainer.widthAnchor, multiplier: 5/10)
         ])
     }
-    
+
     private func configureCancelButton() {
         cancelButton.backgroundColor = .lightGray
         cancelButton.layer.cornerRadius = 15
@@ -319,35 +231,57 @@ extension RegistrationVC {
         cancelButton.translatesAutoresizingMaskIntoConstraints = false
         addConstraintsCancelButton()
     }
-    
+
     private func addConstraintsCancelButton() {
         NSLayoutConstraint.activate([
-            cancelButton.topAnchor.constraint(equalTo: phoneTF.bottomAnchor, constant: spacingTop),
+            cancelButton.topAnchor.constraint(equalTo: mailTF.bottomAnchor, constant: spacingTop),
             cancelButton.leadingAnchor.constraint(equalTo: viewContainer.leadingAnchor, constant:  8),
             cancelButton.widthAnchor.constraint(equalTo: viewContainer.widthAnchor, multiplier: 4/10)
         ])
-    }
-    
-    @objc
-    private func signUpOnClick() {
-        print("signUpOnClick")
-    }
-    
-    @objc
-    private func cancelOnClick() {
-        guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else { return }
-        sceneDelegate.window?.rootViewController = WelcomeVC()
-        sceneDelegate.window?.makeKeyAndVisible()
     }
 
     func registerForKeyboardNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(kbWillShow), name: NSNotification.Name(UIResponder.keyboardWillShowNotification.rawValue), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(kbWillHide), name: NSNotification.Name(UIResponder.keyboardWillHideNotification.rawValue), object: nil)
     }
-    
+
     func removeKeyboardNotifications() {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+    // MARK: - Actions
+    @objc
+    private func signUpOnClick() {
+        
+        guard let name = userNameTF.text else { return }
+        guard let password = passwordTF.text else { return }
+        guard let firstName = firstNameTF.text else { return }
+        guard let lastName = lastNameTF.text else { return }
+        guard let email = mailTF.text else { return }
+        
+        let id = viewModel.users.count + 1
+        let userAdd = User(id: id, userName: name, password: password, firstName: firstName, lastName: lastName, email: email)
+        
+        let isAdd = viewModel.addUser(for: userAdd)
+        if isAdd {
+            let alert = UIAlertController(title: "Сообщение", message: "Пользователь зарегестрирован", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { _ in
+                let loginVC = LoginVC()
+                loginVC.viewModel = self.viewModel
+                self.navigationController?.pushViewController(loginVC, animated: true)
+            }))
+            self.present(alert, animated: true)
+        } else {
+            let alert = UIAlertController(title: "Сообщение", message: "Пользователь \(name) уже существует.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .default))
+            self.present(alert, animated: true)
+        }
+    }
+
+    @objc
+    private func cancelOnClick() {
+        navigationController?.popViewController(animated: true)
     }
     
     @objc
@@ -355,6 +289,7 @@ extension RegistrationVC {
         guard let userInfo = notification.userInfo else { return }
         guard let kbFrameSize = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
         
+        //let offSet = viewContainer.frame.minY + viewContainer.frame.height - (cancelButton.frame.minY + cancelButton.frame.height)
         let offSet = viewContainer.frame.minY + viewContainer.frame.height - (cancelButton.frame.minY + cancelButton.frame.height)
         
         if kbFrameSize.cgRectValue.height > offSet {
@@ -369,5 +304,20 @@ extension RegistrationVC {
         UIView.animate(withDuration: 0.3, delay: 0) {
             self.scrollView.contentOffset = CGPoint.zero
         }
+    }
+    
+    @objc
+    private func tapGesture() {
+        userNameTF.resignFirstResponder()
+        passwordTF.resignFirstResponder()
+        firstNameTF.resignFirstResponder()
+        lastNameTF.resignFirstResponder()
+        mailTF.resignFirstResponder()
+    }
+    
+    func showAlert(title: String, msg: String, titleAction: String) {
+        let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: titleAction, style: .default))
+        self.present(alert, animated: true)
     }
 }

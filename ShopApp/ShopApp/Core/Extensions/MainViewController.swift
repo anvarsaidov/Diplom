@@ -12,7 +12,6 @@ extension MainVC {
     func setup() {
         //configureSearchBar()
         configureTableView()
-        
         getDataTableView()
     }
     
@@ -34,8 +33,9 @@ extension MainVC {
     
     // MARK: - Запрос картинок для продуктов
     private func getDataTableView() {
-        api.getRequestProducts(for: EndPointRequest.all) { [self] data, responce in
+        api.getRequestProduct(for: EndPointRequest.all) { [self] data, responce in
             products = responce
+            self.tableView.reloadData()
             self.arrImage.removeAll()
             for obj in responce {
                 let url = obj.image
