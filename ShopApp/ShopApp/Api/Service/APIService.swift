@@ -21,7 +21,6 @@ final class ApiService: ApiServiceProtocol {
     func getRequestProduct(for endPointRequest: EndPointRequest, complition: @escaping ((String, Product) -> ())) {
         guard let url = URL(string: "\(baseUrl)\(endPointRequest.description)") else { return }
         var request = URLRequest(url: url)
-        print(request)
         request.httpMethod = "GET"
         let _ = session.dataTask(with: request) { data, respone, error in
             if let data = data,

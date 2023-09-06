@@ -26,6 +26,7 @@ class ProfileVC: UIViewController {
     var viewModel = UserViewModel()
     
     override func viewDidLoad() {
+        print("ProfileVC: ", #function)
         super.viewDidLoad()
         setup()
     }

@@ -14,7 +14,6 @@ extension TableCell {
         configureTitleLabel()
         configureDescriptionLabel()
         configurePriceLabel()
-        configureAddCartButton()
     }
     
     // MARK: - Конфигурируем View ячейки для таблицы
@@ -106,36 +105,6 @@ extension TableCell {
         NSLayoutConstraint.activate([
             priceLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -16),
             priceLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
-        ])
-    }
-    
-    // MARK: - Конфигурируем кнопку "Дабавить в корзину"
-    private func configureAddCartButton() {
-        addProductCart.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(addProductCart)
-        
-        addProductCart.tintColor = .black
-        addProductCart.backgroundColor = UIColor.lightGray
-        addProductCart.layer.cornerRadius = 10
-        addProductCart.setImage(UIImage(systemName: "cart.badge.plus"), for: .normal)
-        addProductCart.setTitle(NSLocalizedString("Add", comment: ""), for: .normal)
-        addProductCart.addTarget(nil, action: #selector(addCartProductOnClick), for: .touchUpInside)
-        addProductCart.titleLabel?.font = UIFont.systemFont(ofSize: 12)
-        addConstrintAddCartButton()
-    }
-    
-    // MARK: - Action для кнопки "Дабавить в корзину"
-    @objc
-    private func addCartProductOnClick() {
-        print(#function)
-    }
-    
-    // MARK: - Задаем констрэйнты для кнопки "Дабавить в корзину"
-    private func addConstrintAddCartButton() {
-        NSLayoutConstraint.activate([
-            addProductCart.bottomAnchor.constraint(equalTo: priceLabel.bottomAnchor),
-            addProductCart.leadingAnchor.constraint(equalTo: image.trailingAnchor, constant: 16),
-            addProductCart.widthAnchor.constraint(equalToConstant: 110)
         ])
     }
 }

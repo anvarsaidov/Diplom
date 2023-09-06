@@ -9,32 +9,34 @@ import UIKit
 
 extension CartTableCell {
     func setupCell() {
-        
+        configureView()
+        configureImage()
+        configureTitleLabel()
+        configureDescriptionLabel()
+        configurePriceLabel()
+        configureCountQuantityLabel()
     }
     
     private func configureView() {
         view.translatesAutoresizingMaskIntoConstraints = false
-        
         view.backgroundColor = .white
         view.layer.cornerRadius = 15
         view.clipsToBounds = true
         self.contentView.addSubview(view)
-        
         addConstraintsView()
     }
     
     private func addConstraintsView() {
         NSLayoutConstraint.activate([
-            view.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-            view.heightAnchor.constraint(equalTo: self.view.heightAnchor),
-            view.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            view.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
+            view.widthAnchor.constraint(equalTo: self.contentView.widthAnchor),
+            view.heightAnchor.constraint(equalTo: self.contentView.heightAnchor),
+            view.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor),
+            view.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor)
         ])
     }
     
     private func configureImage() {
         image.translatesAutoresizingMaskIntoConstraints = false
-        
         view.addSubview(image)
         addConstraintImage()
     }
@@ -68,7 +70,7 @@ extension CartTableCell {
     
     // MARK: - Конфигурируем поле с описанием продукта в 3 строчки
     private func configureDescriptionLabel() {
-        descriptionLabel.numberOfLines = 3
+        descriptionLabel.numberOfLines = 5
         descriptionLabel.font = UIFont.boldSystemFont(ofSize: 10)
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(descriptionLabel)
@@ -101,4 +103,17 @@ extension CartTableCell {
         ])
     }
     
+    private func configureCountQuantityLabel() {
+        countQuantityLabel.translatesAutoresizingMaskIntoConstraints = false
+        countQuantityLabel.font = UIFont.boldSystemFont(ofSize: 20)
+        view.addSubview(countQuantityLabel)
+        addConstraintCountQuantityLabel()
+    }
+    
+    private func addConstraintCountQuantityLabel() {
+        NSLayoutConstraint.activate([
+            countQuantityLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant:  -16),
+            countQuantityLabel.leadingAnchor.constraint(equalTo: image.trailingAnchor, constant: 16)
+        ])
+    }
 }

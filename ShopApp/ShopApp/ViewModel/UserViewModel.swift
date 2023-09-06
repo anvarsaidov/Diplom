@@ -14,7 +14,7 @@ protocol UserProtocol {
     func logout()
 }
 
-class UserViewModel: UserProtocol {
+final class UserViewModel: UserProtocol {
     // MARK: VarProperties
     var isLogged: Bool = false
     var idUser: Int = 0

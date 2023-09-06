@@ -14,7 +14,6 @@ class TableCell: UITableViewCell {
     let titleLabel = UILabel()
     let descriptionLabel = UILabel()
     let priceLabel = UILabel()
-    let addProductCart = UIButton()
     
     override func awakeFromNib() {
         super.awakeFromNib()

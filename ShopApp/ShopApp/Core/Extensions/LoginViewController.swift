@@ -212,25 +212,6 @@ extension LoginVC {
         ])
     }
     
-//    private func configureTabBarController(idUser: Int) {
-//        let main = MainVC()
-//        let basket = BasketVC()
-//        let profile = ProfileVC()
-//
-//        let mainNavController = UINavigationController(rootViewController: main)
-//        let basketNavController = UINavigationController(rootViewController: basket)
-//        let profileNavController = UINavigationController(rootViewController: profile)
-//
-//        let tabBar = UITabBarController()
-//        tabBar.setViewControllers([mainNavController, basketNavController, profileNavController], animated: true)
-//
-//        tabBar.viewControllers?[0].tabBarItem = UITabBarItem(title: NSLocalizedString("Main", comment: ""), image: UIImage(systemName: "homekit"), tag: 0)
-//        tabBar.viewControllers?[1].tabBarItem = UITabBarItem(title: NSLocalizedString("Cart", comment: ""), image: UIImage(systemName: "cart"), tag: 1)
-//        tabBar.viewControllers?[2].tabBarItem = UITabBarItem(title: NSLocalizedString("Profile", comment: ""), image: UIImage(systemName: "person.crop.square"), tag: 2)
-//
-//        self.navigationController?.pushViewController(tabBar, animated: true)
-//    }
-    
     func registerForKeyboardNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(kbWillShow), name: NSNotification.Name(UIResponder.keyboardWillShowNotification.rawValue), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(kbWillHide), name: NSNotification.Name(UIResponder.keyboardWillHideNotification.rawValue), object: nil)

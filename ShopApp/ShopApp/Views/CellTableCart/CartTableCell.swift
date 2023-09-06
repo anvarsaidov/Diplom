@@ -9,22 +9,22 @@ import UIKit
 
 class CartTableCell: UITableViewCell {
     
-    let view = UIView()
-    let image = UIImageView()
-    let titleLabel = UILabel()
-    let descriptionLabel = UILabel()
-    let priceLabel = UILabel()
+    lazy var view = UIView()
+    lazy var image = UIImageView()
+    lazy var titleLabel = UILabel()
+    lazy var descriptionLabel = UILabel()
+    lazy var priceLabel = UILabel()
+    lazy var countQuantityLabel = UILabel()
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
         setupCell()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        setupCell()
         // Configure the view for the selected state
+        setupCell()
     }
     
 }

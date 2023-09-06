@@ -9,18 +9,25 @@ import UIKit
 
 class ProductInfoVC: UIViewController {
     
-    let viewContainer = UIView()
-    let closeButton = UIButton()
-    let titleProductLabel = UILabel()
-    let imageProduct = UIImageView()
-    let descriptioProduct = UILabel()
-    let priceProduct = UILabel()
-    let raitingProduct = UILabel()
-    let addCartProduct = UIButton()
-    let countQauntityLabel = UILabel()
+    lazy var viewContainer = UIView()
+    lazy var closeButton = UIButton()
+    lazy var titleProductLabel = UILabel()
+    lazy var imageProduct = UIImageView()
+    lazy var descriptioProduct = UILabel()
+    lazy var priceProduct = UILabel()
+    lazy var raitingProduct = UILabel()
+    lazy var addCartProduct = UIButton()
+    lazy var countQauntityLabel = UILabel()
+    lazy var addQauntityButton = UIButton()
+    lazy var minusQauntityButton = UIButton()
     
     lazy var productItem: Product = []
-    lazy var image = UIImage()
+    var productObject: ProductViewModel?
+    var cartViewModel = CartProductViewModel()
+    var vcDismis: UIViewController?
+    var count = 1
+    
+    weak var delegate: DataTransferDelegate?
     
     let textSize: CGFloat = 18  // размер текста
     
@@ -29,7 +36,19 @@ class ProductInfoVC: UIViewController {
         setup()
     }
     
+    
+    override func viewWillDisappear(_ animated: Bool) {
+//        let notificationCenter = NotificationCenter.default
+//        notificationCenter.post(name: NSNotification.Name.cartProductDic, object: self, userInfo: cartViewModel.cartProductDic)
+//        print(#function)
+        
+       delegate?.dataTransfer(data: cartViewModel)
+    }
+    
     deinit {
+        print(#function)
         productItem.removeAll()
     }
+    
 }
+

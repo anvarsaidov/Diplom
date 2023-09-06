@@ -17,6 +17,9 @@ extension ProductInfoVC {
         configureImageProduct()
         configureDescriptionProduct()
         configurePriceProduct()
+        configureAddQauntityButton()
+        configureMinusQauntityButton()
+        configureCountQauntityLabel()
         configureAddCartProduct()
         
         // MARK: - Задание констрэйнтов для элементов
@@ -26,6 +29,9 @@ extension ProductInfoVC {
         addConstraintAddCartProduct()
         addConstraintDescriptionProduct()
         addConstraintImageProduct()
+        addConstraintCountQauntityLabel()
+        addConstraintAddQauntityButton()
+        addConstraintMinusQauntityButton()
         addConstraintPriceProduct()
     }
     
@@ -92,7 +98,11 @@ extension ProductInfoVC {
     private func configureImageProduct() {
         imageProduct.translatesAutoresizingMaskIntoConstraints = false
         imageProduct.contentMode = .scaleAspectFit
-        imageProduct.image = image
+        DispatchQueue.main.async { [self] in
+            productObject?.api.getRequestImageProduct(for: self.productItem.first?.image ?? "", complition: { UIImage in
+                self.imageProduct.image = UIImage
+            })
+        }
         
         viewContainer.addSubview(imageProduct)
     }
@@ -100,8 +110,8 @@ extension ProductInfoVC {
     // MARK: - Задание констрэйнтов для фото продукта
     private func addConstraintImageProduct() {
         NSLayoutConstraint.activate([
-            imageProduct.widthAnchor.constraint(equalTo: viewContainer.widthAnchor, multiplier: 0.6),
-            imageProduct.heightAnchor.constraint(equalTo: viewContainer.widthAnchor, multiplier: 0.6),
+            imageProduct.widthAnchor.constraint(equalTo: viewContainer.widthAnchor, multiplier: 0.5),
+            imageProduct.heightAnchor.constraint(equalTo: viewContainer.widthAnchor, multiplier: 0.5),
             imageProduct.topAnchor.constraint(equalTo: titleProductLabel.bottomAnchor, constant: 16),
             imageProduct.centerXAnchor.constraint(equalTo: viewContainer.centerXAnchor)
         ])
@@ -113,7 +123,7 @@ extension ProductInfoVC {
         descriptioProduct.font = UIFont.boldSystemFont(ofSize: 12)
         descriptioProduct.textAlignment = .center
         descriptioProduct.text = productItem.first?.description
-        descriptioProduct.numberOfLines = 0
+        descriptioProduct.numberOfLines = 5
         viewContainer.addSubview(descriptioProduct)
     }
     
@@ -136,17 +146,82 @@ extension ProductInfoVC {
         } else {
             priceProduct.text = "0 $"
         }
-        
-        
         viewContainer.addSubview(priceProduct)
     }
     
     // MARK: - Задание констрэйнтов поля стоимости продукта
     private func addConstraintPriceProduct() {
         NSLayoutConstraint.activate([
-            priceProduct.widthAnchor.constraint(equalTo: viewContainer.widthAnchor, multiplier: 0.8),
+            priceProduct.widthAnchor.constraint(equalTo: viewContainer.widthAnchor, multiplier: 0.6),
             priceProduct.centerXAnchor.constraint(equalTo: viewContainer.centerXAnchor),
-            priceProduct.bottomAnchor.constraint(equalTo: addCartProduct.topAnchor, constant: -16)
+            priceProduct.topAnchor.constraint(equalTo: descriptioProduct.bottomAnchor, constant: 16)
+        ])
+    }
+    
+    //MARK: -
+    
+    private func configureCountQauntityLabel() {
+        countQauntityLabel.translatesAutoresizingMaskIntoConstraints = false
+        countQauntityLabel.font = UIFont.boldSystemFont(ofSize: textSize)
+        countQauntityLabel.textAlignment = .center
+        countQauntityLabel.text = "\(count)"
+        countQauntityLabel.numberOfLines = 0
+        
+        viewContainer.addSubview(countQauntityLabel)
+    }
+    
+    private func addConstraintCountQauntityLabel() {
+        NSLayoutConstraint.activate([
+            countQauntityLabel.widthAnchor.constraint(equalTo: viewContainer.widthAnchor, multiplier: 0.1),
+            countQauntityLabel.heightAnchor.constraint(equalTo: priceProduct.heightAnchor, multiplier: 1),
+            countQauntityLabel.centerXAnchor.constraint(equalTo: viewContainer.centerXAnchor),
+            countQauntityLabel.bottomAnchor.constraint(equalTo: addCartProduct.topAnchor, constant: -16)
+        ])
+    }
+    
+    private func configureAddQauntityButton() {
+        addQauntityButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        addQauntityButton.tintColor = .black
+        addQauntityButton.backgroundColor = UIColor.lightGray
+        addQauntityButton.layer.cornerRadius = 10
+        addQauntityButton.setImage(UIImage(systemName: "plus.square"), for: .normal)
+        addQauntityButton.setTitle("", for: .normal)
+        addQauntityButton.addTarget(nil, action: #selector(addQauntityOnClick), for: .touchUpInside)
+        addQauntityButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
+        
+        viewContainer.addSubview(addQauntityButton)
+    }
+    
+    private func addConstraintAddQauntityButton() {
+        NSLayoutConstraint.activate([
+            addQauntityButton.heightAnchor.constraint(equalTo: priceProduct.heightAnchor, multiplier: 1.1),
+            addQauntityButton.widthAnchor.constraint(equalTo: priceProduct.heightAnchor, multiplier: 1.1),
+            addQauntityButton.leadingAnchor.constraint(equalTo: countQauntityLabel.trailingAnchor, constant: 16),
+            addQauntityButton.bottomAnchor.constraint(equalTo: addCartProduct.topAnchor, constant: -16)
+        ])
+    }
+    
+    private func configureMinusQauntityButton() {
+        minusQauntityButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        minusQauntityButton.tintColor = .black
+        minusQauntityButton.backgroundColor = UIColor.lightGray
+        minusQauntityButton.layer.cornerRadius = 10
+        minusQauntityButton.setImage(UIImage(systemName: "minus.square"), for: .normal)
+        minusQauntityButton.setTitle("", for: .normal)
+        minusQauntityButton.addTarget(nil, action: #selector(minusQauntityOnClick), for: .touchUpInside)
+        minusQauntityButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
+        
+        viewContainer.addSubview(minusQauntityButton)
+    }
+    
+    private func addConstraintMinusQauntityButton() {
+        NSLayoutConstraint.activate([
+            minusQauntityButton.heightAnchor.constraint(equalTo: priceProduct.heightAnchor, multiplier: 1.1),
+            minusQauntityButton.widthAnchor.constraint(equalTo: priceProduct.heightAnchor, multiplier: 1.1),
+            minusQauntityButton.trailingAnchor.constraint(equalTo: countQauntityLabel.leadingAnchor, constant: -16),
+            minusQauntityButton.bottomAnchor.constraint(equalTo: addCartProduct.topAnchor, constant: -16)
         ])
     }
     
@@ -177,13 +252,35 @@ extension ProductInfoVC {
     // MARK: - Actions buttons
     @objc
     private func addCartProductOnClick() {
-        print(#function)
+        guard let prod = productItem.first else { return }
+        cartViewModel.addToCart(addProduct: prod, quantity: count)
     }
     
     @objc
     private func closeButtonOnClick() {
-        dismiss(animated: true)
+        dismiss(animated: true) {
+            print(#function)
+            guard let mainVC = self.vcDismis as? MainVC else { return }
+            mainVC.cartProductViewModel = self.cartViewModel
+        }
     }
+    
+    @objc
+    private func addQauntityOnClick() {
+        print(#function)
+        count += 1
+        countQauntityLabel.text = "\(count)"
+    }
+    
+    @objc
+    private func minusQauntityOnClick() {
+        print(#function)
+        if count > 1 {
+            count -= 1
+            countQauntityLabel.text = "\(count)"
+        }
+    }
+    
     
 }
 

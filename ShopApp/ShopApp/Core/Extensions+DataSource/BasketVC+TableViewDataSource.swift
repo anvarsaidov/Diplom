@@ -9,7 +9,9 @@ import UIKit.UITableView
 
 extension BasketVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        5//cartProductVM.cartProduct.count
+        let product = cartProductVM.cartProductDic.map({$0.key})
+        print("numberOfRowsInSection: ", product.count)
+        return product.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -17,13 +19,22 @@ extension BasketVC: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? CartTableCell else {
             return UITableViewCell()
         }
+        let product = cartProductVM.cartProductDic.map({$0.key})
+        let countQuantity = cartProductVM.cartProductDic.map({$0.value})
+        let totalPriceProduct = product[row].price * Double(countQuantity[row])
         
-        cell.titleLabel.text = "\(cartProductVM.cartProduct[row].title)"
-        cell.descriptionLabel.text = "\(cartProductVM.cartProduct[row].description)"
-        cell.priceLabel.text = "0.00 $"
+        cell.titleLabel.text = "\(product[row].title)"
+        cell.descriptionLabel.text = "\(product[row].description)"
+        
+        cell.priceLabel.text = totalPriceProduct.format(f: "2")
+        cell.countQuantityLabel.text = "\(countQuantity[row]) шт."
+        
+        api.getRequestImageProduct(for: product[row].image) { UIImage in
+            DispatchQueue.main.async {
+                cell.image.image = UIImage
+            }
+        }
         
         return cell
     }
-    
-    
 }
