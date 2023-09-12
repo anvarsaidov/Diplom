@@ -10,17 +10,15 @@ import UIKit
 extension LoginVC {
     
     func configureVC() {
-        
-        self.view.addSubview(imageFon)
+        self.view.backgroundColor = UIColor(named: "backgroundColor")
         self.view.addSubview(scrollView)
         scrollView.addSubview(viewContainer)
         viewContainer.addSubview(infoLabel)
         viewContainer.addSubview(nameTF)
         viewContainer.addSubview(passwordTF)
-        viewContainer.addSubview(rememberSwitch)
-        viewContainer.addSubview(rememberLabel)
         viewContainer.addSubview(signInButton)
         viewContainer.addSubview(cancelButton)
+        
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapGesture)))
         
         [nameTF, passwordTF].forEach {
@@ -46,12 +44,6 @@ extension LoginVC {
        
         // MARK: - Создание текстового поля "Пароль"
         makePasswordTF()
-        
-        // MARK: - Создание переключателя "Запомнить"
-        makeRemember()
-        
-        // MARK: - Создание текстового поля "Запомнить"
-        makeRememberLabel()
         
         // MARK: - Создание кнопки "Войти"
         makeSignInButton()
@@ -79,7 +71,6 @@ extension LoginVC {
     
     private func makeViewContainer() {
         viewContainer.translatesAutoresizingMaskIntoConstraints = false
-        viewContainer.backgroundColor = .systemBackground
         viewContainer.layer.cornerRadius = 15
         
         addConstraintsViewConteiner()
@@ -89,13 +80,13 @@ extension LoginVC {
         NSLayoutConstraint.activate([
             viewContainer.bottomAnchor.constraint(equalTo: cancelButton.bottomAnchor, constant: 16),
             viewContainer.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 0.8),
-            viewContainer.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor),
-            viewContainer.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor)
+            viewContainer.centerYAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerYAnchor),
+            viewContainer.centerXAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerXAnchor)
         ])
     }
     
     private func makeInfoLabel() {
-        infoLabel.text = NSLocalizedString("InfoLogin", comment: "")
+        infoLabel.text = "InfoLogin".localize(tableName: DataSharing.shared.language)
         infoLabel.textAlignment = .center
         infoLabel.font = UIFont.boldSystemFont(ofSize: 30)
         
@@ -113,7 +104,7 @@ extension LoginVC {
     }
     
     private func makeNameTF() {
-        nameTF.placeholder = NSLocalizedString("UserName", comment: "")
+        nameTF.placeholder = "UserName".localize(tableName: DataSharing.shared.language)
         nameTF.returnKeyType = .continue
         nameTF.translatesAutoresizingMaskIntoConstraints = false
         nameTF.borderStyle = .roundedRect
@@ -129,7 +120,7 @@ extension LoginVC {
     }
     
     private func makePasswordTF() {
-        passwordTF.placeholder = NSLocalizedString("Password", comment: "")
+        passwordTF.placeholder = "Password".localize(tableName: DataSharing.shared.language)
         passwordTF.returnKeyType = .done
         passwordTF.borderStyle = .roundedRect
         passwordTF.isSecureTextEntry = true
@@ -148,38 +139,10 @@ extension LoginVC {
         ])
     }
     
-    private func makeRemember() {
-        rememberSwitch.contentMode = .right
-        
-        rememberSwitch.translatesAutoresizingMaskIntoConstraints = false
-        addConstraintsRememberSwitch()
-    }
-    
-    private func addConstraintsRememberSwitch() {
-        NSLayoutConstraint.activate([
-            rememberSwitch.topAnchor.constraint(equalTo: passwordTF.bottomAnchor, constant: 12),
-            rememberSwitch.leadingAnchor.constraint(equalTo: passwordTF.leadingAnchor, constant: 0)
-        ])
-    }
-    
-    private func makeRememberLabel() {
-        rememberLabel.text = NSLocalizedString("Remember", comment: "")
-        rememberLabel.translatesAutoresizingMaskIntoConstraints = false
-        rememberLabel.font = UIFont.boldSystemFont(ofSize: 10)
-        addConstraintsRememberLabel()
-    }
-    
-    private func addConstraintsRememberLabel() {
-        NSLayoutConstraint.activate([
-            rememberLabel.centerYAnchor.constraint(equalTo: rememberSwitch.centerYAnchor),
-            rememberLabel.leadingAnchor.constraint(equalTo: rememberSwitch.trailingAnchor, constant: 8)
-        ])
-    }
-    
     private func makeSignInButton() {
         signInButton.backgroundColor = .lightGray
         signInButton.layer.cornerRadius = 15
-        signInButton.setTitle(NSLocalizedString("SignIn", comment: ""), for: .normal)
+        signInButton.setTitle("SignIn".localize(tableName: DataSharing.shared.language), for: .normal)
         signInButton.setTitleColor(UIColor.black, for: .normal)
         signInButton.addTarget(nil, action: #selector(signInOnClick), for: .touchUpInside)
         signInButton.translatesAutoresizingMaskIntoConstraints = false
@@ -197,7 +160,7 @@ extension LoginVC {
     private func makeCancelButton() {
         cancelButton.backgroundColor = .lightGray
         cancelButton.layer.cornerRadius = 15
-        cancelButton.setTitle(NSLocalizedString("Cancel", comment: ""), for: .normal)
+        cancelButton.setTitle("Cancel".localize(tableName: DataSharing.shared.language), for: .normal)
         cancelButton.setTitleColor(UIColor.black, for: .normal)
         cancelButton.addTarget(nil, action: #selector(cancelOnClick), for: .touchUpInside)
         cancelButton.translatesAutoresizingMaskIntoConstraints = false
@@ -226,16 +189,19 @@ extension LoginVC {
     
     @objc
     private func signInOnClick() {
-//        configureTabBarController()
         guard let name = nameTF.text else { return }
         guard let password = passwordTF.text else { return }
         
-        let (isLogIn, id) = viewModel.logIn(userName: name, password: password)
+        let (isLogIn, _) = viewModel.logIn(userName: name, password: password)
         if isLogIn {
-            let alert = UIAlertController(title: NSLocalizedString("titleAlertLogIn", comment: ""), message: NSLocalizedString("msgAlertLogIn", comment: ""), preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default, handler: { _ in
+            let alert = UIAlertController(title: "titleAlertLogIn".localize(tableName: DataSharing.shared.language),
+                                          message: "msgAlertLogIn".localize(tableName: DataSharing.shared.language),
+                                          preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "Ok".localize(tableName: DataSharing.shared.language),
+                                          style: .default, handler: { _ in 
                 guard let vc = self.navigationController?.viewControllers.first as? ProfileVC else { return }
-                vc.viewModel = self.viewModel
+                vc.userVM = self.viewModel
                 vc.signInButton.isHidden = true
                 vc.signUpButton.isHidden = true
                 vc.exitButton.isHidden = false
@@ -244,8 +210,11 @@ extension LoginVC {
             self.present(alert, animated: true)
             
         } else {
-            let alert = UIAlertController(title: NSLocalizedString("titleAlertLogIn", comment: ""), message: NSLocalizedString("msgAlertLogInNo", comment: ""), preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: .default))
+            let alert = UIAlertController(title: "titleAlertLogIn".localize(tableName: DataSharing.shared.language),
+                                          message: "msgAlertLogInNo".localize(tableName: DataSharing.shared.language),
+                                          preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok".localize(tableName: DataSharing.shared.language),
+                                          style: .default))
             self.present(alert, animated: true)
         }
     }

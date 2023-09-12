@@ -1,10 +1,11 @@
 /* 
-  Localizable.strings
+  LanguageRussian.strings
   ShopApp
 
-  Created by AnvarSaidov on 17.08.23.
+  Created by AnvarSaidov on 11.09.23.
   
 */
+
 "SignIn" = "Войти";
 "SignUp" = "Регистрация";
 "UserName" = "Имя пользователя";
@@ -46,3 +47,4 @@
 "Device" = "Устройство";
 "Light" = "Светлая";
 "Dark" = "Темная";
+"msgIsEmptyProductCart" = "Корзина пуста.";

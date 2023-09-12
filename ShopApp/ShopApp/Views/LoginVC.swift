@@ -9,16 +9,14 @@ import UIKit
 
 class LoginVC: UIViewController {
     
-    let imageFon = UIImageView(image: UIImage(named: "welcomeImage"))
-    let scrollView = UIScrollView()
-    let viewContainer = UIView()
-    let infoLabel = UILabel()
-    let nameTF = UITextField()
-    let passwordTF = UITextField()
-    let rememberSwitch = UISwitch()
-    let rememberLabel = UILabel()
-    let signInButton = UIButton()
-    let cancelButton = UIButton()
+    //lazy var imageFon = UIImageView(image: UIImage(named: "welcomeImage"))
+    lazy var scrollView = UIScrollView()
+    lazy var viewContainer = UIView()
+    lazy var infoLabel = UILabel()
+    lazy var nameTF = UITextField()
+    lazy var passwordTF = UITextField()
+    lazy var signInButton = UIButton()
+    lazy var cancelButton = UIButton()
     
     var viewModel = UserViewModel()
     

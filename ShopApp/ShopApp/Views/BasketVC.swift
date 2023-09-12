@@ -7,50 +7,42 @@
 
 import UIKit
 
-class BasketVC: UIViewController, DataTransferDelegate {
+class BasketVC: UIViewController {
    
-    
     let identifier = "myCell"
     lazy var tableView = UITableView()
     lazy var totalPriceLabel = UILabel()
-    lazy var cartProductVM = CartProductViewModel()
+    lazy var buyButton = UIButton()
+    var cartProductVM = CartProductViewModel() {
+        didSet {
+            updateTotalPriceLabel()
+            tableView.reloadData()
+            updateBadge(count: cartProductVM.cartProductDic.count)
+        }
+    }
     
-//    let notificationCenter = NotificationCenter.default
+    var userVM = UserViewModel()
+    
     let api = ApiService()
     
-    
     override func viewDidLoad() {
-        print("BasketVC: ",#function)
         super.viewDidLoad()
-        
-        self.title = NSLocalizedString("Cart", comment: "")
-        self.view.backgroundColor = .white
-        
         setup()
-//
-//        notificationCenter.addObserver(self, selector: #selector(notificationObserver(notification:)), name: NSNotification.Name.cartProductDic, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        print(cartProductVM.cartProductDic.count)
+        cartProductVM = DataSharing.shared.cartVM
+        userVM = DataSharing.shared.userVM
+        
         tableView.reloadData()
-        totalPriceLabel.text = "Total: \(cartProductVM.totalPrice.format(f: "2"))"
+        updateTotalPriceLabel()
     }
     
-    func dataTransfer(data: CartProductViewModel) {
-        print(#function)
-        cartProductVM = data
+    override func viewWillDisappear(_ animated: Bool) {
+        DataSharing.shared.cartVM = cartProductVM
+        DataSharing.shared.userVM = userVM
     }
     
     deinit {
-//        notificationCenter.removeObserver(self)
     }
-//
-//    @objc
-//    private func notificationObserver(notification: Notification) {
-//        guard let data = notification.userInfo as? [ProductElement: Int] else { return }
-//        cartProductVM.cartProductDic = data
-//        tableView.reloadData()
-//    }
-
 }

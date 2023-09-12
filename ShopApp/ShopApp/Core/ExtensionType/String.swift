@@ -11,4 +11,8 @@ extension String {
     func validateString(_ regex: String) -> Bool {
         return self.range(of: regex, options: .regularExpression, range: nil, locale: nil) != nil
     }
+    
+    func localize(tableName: String = "Localizable") -> String {
+        NSLocalizedString(self, tableName: tableName, value: "***\(self)***", comment: "")
+    }
 }

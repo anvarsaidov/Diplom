@@ -9,17 +9,17 @@ import UIKit
 
 class RegistrationVC: UIViewController {
     
-    let imageFon = UIImageView(image: UIImage(named: "welcomeImage"))
-    let scrollView = UIScrollView()
-    let viewContainer = UIView()
-    let infoLabel = UILabel()
-    let userNameTF = UITextField()
-    let passwordTF = UITextField()
-    let firstNameTF = UITextField()
-    let lastNameTF = UITextField()
-    let mailTF = UITextField()
-    let signUpButton = UIButton()
-    let cancelButton = UIButton()
+   //lazy var imageFon = UIImageView(image: UIImage(named: "welcomeImage"))
+    lazy var scrollView = UIScrollView()
+    lazy var viewContainer = UIView()
+    lazy var infoLabel = UILabel()
+    lazy var userNameTF = UITextField()
+    lazy var passwordTF = UITextField()
+    lazy var firstNameTF = UITextField()
+    lazy var lastNameTF = UITextField()
+    lazy var mailTF = UITextField()
+    lazy var signUpButton = UIButton()
+    lazy var cancelButton = UIButton()
     
     let spacingTop: CGFloat = 12
     

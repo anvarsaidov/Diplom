@@ -1,3 +1,11 @@
+/* 
+  LanguageEnglish.strings
+  ShopApp
+
+  Created by AnvarSaidov on 11.09.23.
+  
+*/
+
 "SignIn" = "Sign In";
 "SignUp" = "Sign Up";
 "UserName" = "UserName";
@@ -9,7 +17,7 @@
 "Remember" = "Remember";
 "FirstName" = "FirstName";
 "LastName" = "LastName";
-"Mail" = "mail";
+"Mail" = "Mail";
 "Street" = "Street";
 "Number" = "Number";
 "Phone" = "Phone";
@@ -39,3 +47,5 @@
 "Device" = "Device";
 "Light" = "Light";
 "Dark" = "Dark";
+"msgIsEmptyProductCart" = "Cart is empty.";
+

@@ -11,8 +11,8 @@ extension ProductInfoVC {
     
     func setup() {
         // MARK: - Конфигурирование элементов
+        self.view.backgroundColor = UIColor(named: "backgroundColor")
         configureViewContainer()
-        configureCloseButton()
         configureTitleProduct()
         configureImageProduct()
         configureDescriptionProduct()
@@ -24,7 +24,6 @@ extension ProductInfoVC {
         
         // MARK: - Задание констрэйнтов для элементов
         addConstraintViewContainer()
-        addConstraintCloseButton()
         addConstraintTitleProduct()
         addConstraintAddCartProduct()
         addConstraintDescriptionProduct()
@@ -39,7 +38,7 @@ extension ProductInfoVC {
     private func configureViewContainer() {
         viewContainer.translatesAutoresizingMaskIntoConstraints = false
         viewContainer.layer.cornerRadius = 15
-        viewContainer.backgroundColor = .white
+        //viewContainer.backgroundColor = .white
         self.view.addSubview(viewContainer)
     }
     
@@ -99,11 +98,10 @@ extension ProductInfoVC {
         imageProduct.translatesAutoresizingMaskIntoConstraints = false
         imageProduct.contentMode = .scaleAspectFit
         DispatchQueue.main.async { [self] in
-            productObject?.api.getRequestImageProduct(for: self.productItem.first?.image ?? "", complition: { UIImage in
+            productViewModel.api.getRequestImageProduct(for: self.productItem.first?.image ?? "", complition: { UIImage in
                 self.imageProduct.image = UIImage
             })
         }
-        
         viewContainer.addSubview(imageProduct)
     }
     
@@ -142,7 +140,7 @@ extension ProductInfoVC {
         priceProduct.font = UIFont.boldSystemFont(ofSize: textSize)
         priceProduct.textAlignment = .center
         if let price = productItem.first?.price {
-            priceProduct.text = price.format(f: "2")//"\(String(format: "%.2f", price)) $"
+            priceProduct.text = price.format(f: "2")
         } else {
             priceProduct.text = "0 $"
         }
@@ -229,12 +227,11 @@ extension ProductInfoVC {
     private func configureAddCartProduct() {
         addCartProduct.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(addCartProduct)
-        
         addCartProduct.tintColor = .black
         addCartProduct.backgroundColor = UIColor.lightGray
         addCartProduct.layer.cornerRadius = 10
         addCartProduct.setImage(UIImage(systemName: "cart.badge.plus"), for: .normal)
-        addCartProduct.setTitle(NSLocalizedString("Add", comment: ""), for: .normal)
+        addCartProduct.setTitle("Add".localize(tableName: DataSharing.shared.language), for: .normal)
         addCartProduct.addTarget(nil, action: #selector(addCartProductOnClick), for: .touchUpInside)
         addCartProduct.titleLabel?.font = UIFont.systemFont(ofSize: 18)
     }
@@ -251,36 +248,29 @@ extension ProductInfoVC {
     
     // MARK: - Actions buttons
     @objc
-    private func addCartProductOnClick() {
+    private func addCartProductOnClick(_ sender: UIButton) {
         guard let prod = productItem.first else { return }
-        cartViewModel.addToCart(addProduct: prod, quantity: count)
-    }
-    
-    @objc
-    private func closeButtonOnClick() {
-        dismiss(animated: true) {
-            print(#function)
-            guard let mainVC = self.vcDismis as? MainVC else { return }
-            mainVC.cartProductViewModel = self.cartViewModel
+        cartViewModel.addToCart(addProduct: prod, quantity: count) { count in
+            updateBadge(count: count)
         }
     }
     
     @objc
-    private func addQauntityOnClick() {
-        print(#function)
+    private func closeButtonOnClick(_ sender: UIButton) {
+        dismiss(animated: true)
+    }
+    
+    @objc
+    private func addQauntityOnClick(_ sender: UIButton) {
         count += 1
         countQauntityLabel.text = "\(count)"
     }
     
     @objc
-    private func minusQauntityOnClick() {
-        print(#function)
+    private func minusQauntityOnClick(_ sender: UIButton) {
         if count > 1 {
             count -= 1
             countQauntityLabel.text = "\(count)"
         }
     }
-    
-    
 }
-

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ProductViewModel {
+final class ProductViewModel {
     var api = ApiService()
     var products: Product = []
     

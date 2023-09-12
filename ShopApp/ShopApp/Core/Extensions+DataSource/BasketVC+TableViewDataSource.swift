@@ -10,7 +10,6 @@ import UIKit.UITableView
 extension BasketVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let product = cartProductVM.cartProductDic.map({$0.key})
-        print("numberOfRowsInSection: ", product.count)
         return product.count
     }
     
@@ -28,13 +27,12 @@ extension BasketVC: UITableViewDataSource {
         
         cell.priceLabel.text = totalPriceProduct.format(f: "2")
         cell.countQuantityLabel.text = "\(countQuantity[row]) шт."
-        
+    
         api.getRequestImageProduct(for: product[row].image) { UIImage in
             DispatchQueue.main.async {
                 cell.image.image = UIImage
             }
         }
-        
         return cell
     }
 }

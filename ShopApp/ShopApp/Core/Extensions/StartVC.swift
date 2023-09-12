@@ -9,25 +9,32 @@ import UIKit
 
 extension StartVC {
     func configureVC() {
+        DataSharing.shared.language = getTableNameLanguage()
         generateTabBar()
         setTabBarAppearance()
+    }
+    
+    private func getTableNameLanguage() -> String {
+        let defaults = UserDefaults.standard
+        guard let lang = defaults.string(forKey: "lang") else { return "LanguageEnglish" }
+        return lang
     }
     
     private func generateTabBar() {
         viewControllers = [
             generateVC(
                 viewController: MainVC(),
-                title: "Main",
+                title: "Main".localize(tableName: DataSharing.shared.language),
                 image: UIImage(systemName: "homekit")
             ),
             generateVC(
                 viewController: BasketVC(),
-                title: "Cart",
+                title: "Cart".localize(tableName: DataSharing.shared.language),
                 image: UIImage(systemName: "cart")
             ),
             generateVC(
                 viewController: ProfileVC(),
-                title: "Profile",
+                title: "Profile".localize(tableName: DataSharing.shared.language),
                 image: UIImage(systemName: "person.crop.square")
             )
         ]
@@ -35,7 +42,7 @@ extension StartVC {
     
     private func generateVC(viewController: UIViewController, title: String, image: UIImage?) -> UINavigationController {
         let nav = UINavigationController(rootViewController: viewController)
-        viewController.tabBarItem.title = NSLocalizedString(title, comment: "")
+        viewController.tabBarItem.title = title
         viewController.tabBarItem.image = image
         return nav
     }

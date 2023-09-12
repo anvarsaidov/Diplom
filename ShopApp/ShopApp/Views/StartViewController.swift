@@ -9,13 +9,8 @@ import UIKit
 
 class StartVC: UITabBarController {
     
-    weak var tabDelegate: DataTransferDelegate?
-    
-    var cartVM: CartProductViewModel?
-    var productVM: ProductViewModel?
-    var userVM: UserViewModel?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureVC()
     }
 }

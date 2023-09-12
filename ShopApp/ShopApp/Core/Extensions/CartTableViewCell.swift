@@ -19,7 +19,7 @@ extension CartTableCell {
     
     private func configureView() {
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .white
+        //view.backgroundColor = .white
         view.layer.cornerRadius = 15
         view.clipsToBounds = true
         self.contentView.addSubview(view)

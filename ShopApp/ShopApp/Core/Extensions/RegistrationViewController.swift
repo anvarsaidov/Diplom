@@ -9,7 +9,7 @@ import UIKit
 
 extension RegistrationVC {
     func setupVC() {
-        self.view.addSubview(imageFon)
+        self.view.backgroundColor = UIColor(named: "backgroundColor")
         self.view.addSubview(scrollView)
         scrollView.addSubview(viewContainer)
         viewContainer.addSubview(infoLabel)
@@ -23,7 +23,7 @@ extension RegistrationVC {
         
         buildVC()
         
-        [userNameTF, passwordTF].forEach {
+        [userNameTF, passwordTF, firstNameTF, lastNameTF, mailTF].forEach {
             $0?.delegate = self
         }
         
@@ -34,6 +34,7 @@ extension RegistrationVC {
     }
     
     private func buildVC() {
+        
         // MARK: - Конфигурирование объекта scrollView
         configureScrollView()
         
@@ -51,11 +52,11 @@ extension RegistrationVC {
         
         // MARK: - Конфигурирование объекта firstNameTF
         configureFirstNameTF()
-//
-//        // MARK: - Конфигурирование объекта lastNameTF
+        
+        // MARK: - Конфигурирование объекта lastNameTF
         configureLastNameTF()
 
-//        // MARK: - Конфигурирование объекта mailTF
+        // MARK: - Конфигурирование объекта mailTF
         configureMailTF()
         
         // MARK: - Конфигурирование объекта signUpButton
@@ -75,8 +76,8 @@ extension RegistrationVC {
     
     private func addConstraintsScrollView() {
         NSLayoutConstraint.activate([
-            scrollView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            scrollView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
+            scrollView.centerXAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerXAnchor),
+            scrollView.centerYAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerYAnchor),
             scrollView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 1),
             scrollView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 1)
         ])
@@ -84,26 +85,23 @@ extension RegistrationVC {
     
     private func configureViewContainer() {
         viewContainer.translatesAutoresizingMaskIntoConstraints = false
-        viewContainer.backgroundColor = .systemBackground
         viewContainer.layer.cornerRadius = 15
-        
         addConstraintsViewConteiner()
     }
     
     private func addConstraintsViewConteiner() {
         NSLayoutConstraint.activate([
             viewContainer.bottomAnchor.constraint(equalTo: cancelButton.bottomAnchor, constant: 16),
-            viewContainer.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.8),
+            viewContainer.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 0.8),
             viewContainer.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor),
             viewContainer.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor)
         ])
     }
     
     private func configureInfoLabel() {
-        infoLabel.text = NSLocalizedString("InfoRegistration", comment: "")
+        infoLabel.text = "InfoRegistration".localize(tableName: DataSharing.shared.language)
         infoLabel.textAlignment = .center
         infoLabel.font = UIFont.boldSystemFont(ofSize: 30)
-        
         infoLabel.translatesAutoresizingMaskIntoConstraints = false
         addConstraintsInfoLabel()
     }
@@ -118,10 +116,11 @@ extension RegistrationVC {
     }
     
     private func configureUserNameTF() {
-        userNameTF.placeholder = NSLocalizedString("UserName", comment: "")
+        userNameTF.placeholder = "UserName".localize(tableName: DataSharing.shared.language)
         userNameTF.returnKeyType = .continue
-        userNameTF.translatesAutoresizingMaskIntoConstraints = false
         userNameTF.borderStyle = .roundedRect
+        userNameTF.autocorrectionType = .default
+        userNameTF.translatesAutoresizingMaskIntoConstraints = false
         addConstraintsUserNameTF()
     }
     
@@ -134,13 +133,12 @@ extension RegistrationVC {
     }
     
     private func configurePasswordTF() {
-        passwordTF.placeholder = NSLocalizedString("Password", comment: "")
-        passwordTF.returnKeyType = .done
+        passwordTF.placeholder = "Password".localize(tableName: DataSharing.shared.language)
+        passwordTF.returnKeyType = .continue
         passwordTF.borderStyle = .roundedRect
         passwordTF.isSecureTextEntry = true
         passwordTF.autocorrectionType = .no
         passwordTF.textContentType = .oneTimeCode
-        passwordTF.keyboardType = .default
         passwordTF.translatesAutoresizingMaskIntoConstraints = false
         addConstraintsPasswordTF()
     }
@@ -154,11 +152,11 @@ extension RegistrationVC {
     }
     
     private func configureFirstNameTF() {
-        firstNameTF.placeholder = NSLocalizedString("FirstName", comment: "")
+        firstNameTF.placeholder = "FirstName".localize(tableName: DataSharing.shared.language)
         firstNameTF.returnKeyType = .continue
-        firstNameTF.translatesAutoresizingMaskIntoConstraints = false
         firstNameTF.borderStyle = .roundedRect
-        firstNameTF.keyboardType = .default
+        firstNameTF.autocorrectionType = .default
+        firstNameTF.translatesAutoresizingMaskIntoConstraints = false
         addConstraintsFirstName()
     }
 
@@ -171,11 +169,11 @@ extension RegistrationVC {
     }
 
     private func configureLastNameTF() {
-        lastNameTF.placeholder = NSLocalizedString("LastName", comment: "")
+        lastNameTF.placeholder = "LastName".localize(tableName: DataSharing.shared.language)
         lastNameTF.returnKeyType = .continue
-        lastNameTF.translatesAutoresizingMaskIntoConstraints = false
         lastNameTF.borderStyle = .roundedRect
-        lastNameTF.keyboardType = .default
+        lastNameTF.autocorrectionType = .default
+        lastNameTF.translatesAutoresizingMaskIntoConstraints = false
         addConstraintsLastName()
     }
 
@@ -188,11 +186,12 @@ extension RegistrationVC {
     }
 
     private func configureMailTF() {
-        mailTF.placeholder = NSLocalizedString("Mail", comment: "")
-        mailTF.returnKeyType = .continue
-        mailTF.translatesAutoresizingMaskIntoConstraints = false
+        mailTF.placeholder = "Mail".localize(tableName: DataSharing.shared.language)
+        mailTF.returnKeyType = .done
         mailTF.borderStyle = .roundedRect
         mailTF.keyboardType = .emailAddress
+        mailTF.autocorrectionType = .default
+        mailTF.translatesAutoresizingMaskIntoConstraints = false
         addConstraintsMail()
     }
 
@@ -207,7 +206,7 @@ extension RegistrationVC {
     private func configureSignUpButton() {
         signUpButton.backgroundColor = .lightGray
         signUpButton.layer.cornerRadius = 15
-        signUpButton.setTitle(NSLocalizedString("SignUp", comment: ""), for: .normal)
+        signUpButton.setTitle("SignUp".localize(tableName: DataSharing.shared.language), for: .normal)
         signUpButton.setTitleColor(UIColor.black, for: .normal)
         signUpButton.addTarget(nil, action: #selector(signUpOnClick), for: .touchUpInside)
         signUpButton.translatesAutoresizingMaskIntoConstraints = false
@@ -218,14 +217,14 @@ extension RegistrationVC {
         NSLayoutConstraint.activate([
             signUpButton.topAnchor.constraint(equalTo: mailTF.bottomAnchor, constant: spacingTop),
             signUpButton.trailingAnchor.constraint(equalTo: viewContainer.trailingAnchor, constant:  -8),
-            signUpButton.widthAnchor.constraint(equalTo: viewContainer.widthAnchor, multiplier: 5/10)
+            signUpButton.widthAnchor.constraint(equalTo: viewContainer.widthAnchor, multiplier: 0.5)
         ])
     }
 
     private func configureCancelButton() {
         cancelButton.backgroundColor = .lightGray
         cancelButton.layer.cornerRadius = 15
-        cancelButton.setTitle(NSLocalizedString("Cancel", comment: ""), for: .normal)
+        cancelButton.setTitle("Cancel".localize(tableName: DataSharing.shared.language), for: .normal)
         cancelButton.setTitleColor(UIColor.black, for: .normal)
         cancelButton.addTarget(nil, action: #selector(cancelOnClick), for: .touchUpInside)
         cancelButton.translatesAutoresizingMaskIntoConstraints = false
@@ -236,7 +235,7 @@ extension RegistrationVC {
         NSLayoutConstraint.activate([
             cancelButton.topAnchor.constraint(equalTo: mailTF.bottomAnchor, constant: spacingTop),
             cancelButton.leadingAnchor.constraint(equalTo: viewContainer.leadingAnchor, constant:  8),
-            cancelButton.widthAnchor.constraint(equalTo: viewContainer.widthAnchor, multiplier: 4/10)
+            cancelButton.widthAnchor.constraint(equalTo: viewContainer.widthAnchor, multiplier: 0.4)
         ])
     }
 
@@ -261,22 +260,37 @@ extension RegistrationVC {
         guard let email = mailTF.text else { return }
         
         let id = viewModel.users.count + 1
-        let userAdd = User(id: id, userName: name, password: password, firstName: firstName, lastName: lastName, email: email)
+        let userAdd = User(
+            id: id,
+            userName: name,
+            password: password,
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            cartProductHistory: [:]
+        )
         
         let isAdd = viewModel.addUser(for: userAdd)
-        if isAdd {
-            let alert = UIAlertController(title: "Сообщение", message: "Пользователь зарегестрирован", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { _ in
-                let loginVC = LoginVC()
-                loginVC.viewModel = self.viewModel
-                self.navigationController?.pushViewController(loginVC, animated: true)
-            }))
-            self.present(alert, animated: true)
-        } else {
-            let alert = UIAlertController(title: "Сообщение", message: "Пользователь \(name) уже существует.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: .default))
-            self.present(alert, animated: true)
-        }
+        let alert = showAlert(title: "titleAlertLogIn".localize(tableName: DataSharing.shared.language),
+                              msg: isAdd.1.msg.localize(tableName: DataSharing.shared.language))
+        alert.addAction(UIAlertAction(title: "Ok".localize(tableName: DataSharing.shared.language),
+                                      style: .default,handler: { UIAlertAction in
+            if isAdd.1.msg == "AddUser" {
+                let result = self.viewModel.logIn(userName: userAdd.userName, password: userAdd.password).0
+                if result {
+                    guard let vc = self.navigationController?.viewControllers.first as? ProfileVC else { return }
+                    vc.userVM = self.viewModel
+                    vc.signInButton.isHidden = true
+                    vc.signUpButton.isHidden = true
+                    vc.exitButton.isHidden = false
+                    self.navigationController?.viewControllers = [vc]
+                }
+                
+            }
+        }))
+        
+        
+        self.present(alert, animated: true)
     }
 
     @objc
@@ -288,10 +302,8 @@ extension RegistrationVC {
     private func kbWillShow(_ notification: Notification) {
         guard let userInfo = notification.userInfo else { return }
         guard let kbFrameSize = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
-        
-        //let offSet = viewContainer.frame.minY + viewContainer.frame.height - (cancelButton.frame.minY + cancelButton.frame.height)
-        let offSet = viewContainer.frame.minY + viewContainer.frame.height - (cancelButton.frame.minY + cancelButton.frame.height)
-        
+    
+        let offSet = self.view.frame.height - (viewContainer.frame.minY + viewContainer.frame.height)
         if kbFrameSize.cgRectValue.height > offSet {
             UIView.animate(withDuration: 0.3, delay: 0) {
                 self.scrollView.contentOffset = CGPoint(x: 0, y: kbFrameSize.cgRectValue.height - offSet)
@@ -315,9 +327,8 @@ extension RegistrationVC {
         mailTF.resignFirstResponder()
     }
     
-    func showAlert(title: String, msg: String, titleAction: String) {
+    private func showAlert(title: String, msg: String) -> UIAlertController {
         let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: titleAction, style: .default))
-        self.present(alert, animated: true)
+        return alert
     }
 }

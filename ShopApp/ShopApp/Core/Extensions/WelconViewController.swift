@@ -9,7 +9,6 @@ import UIKit
 
 extension WelcomeVC {
     func builderVC() {
-        let navController = UINavigationController(rootViewController: WelcomeVC())
         
         // MARK: - imageFon
         let imageFon: UIImageView = {
@@ -32,7 +31,7 @@ extension WelcomeVC {
             let button = UIButton()
             button.layer.cornerRadius = 10
             button.backgroundColor = .red
-            button.setTitle(NSLocalizedString("SignIn", comment: ""), for: .normal)
+            button.setTitle("SignIn".localize(tableName: DataSharing.shared.language), for: .normal)
             button.setTitleColor(.black, for: .normal)
             button.translatesAutoresizingMaskIntoConstraints = false
             
@@ -46,7 +45,7 @@ extension WelcomeVC {
             let button = UIButton()
             button.layer.cornerRadius = 10
             button.backgroundColor = .red
-            button.setTitle(NSLocalizedString("SignUp", comment: ""), for: .normal)
+            button.setTitle("SignUp".localize(tableName: DataSharing.shared.language), for: .normal)
             button.setTitleColor(.black, for: .normal)
             button.translatesAutoresizingMaskIntoConstraints = false
             

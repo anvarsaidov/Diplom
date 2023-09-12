@@ -10,31 +10,48 @@ import UIKit
 extension MainVC {
     
     func setup() {
-        configureSearchBar()
+        
+        self.title = "Main".localize(tableName: DataSharing.shared.language)
+        self.view.backgroundColor = UIColor(named: "backgroundColor")
+        self.navigationController?.navigationBar.backgroundColor = UIColor(named: "backgroundColor")
+        
+        configureSearchController()
         configureTableView()
         
-        api.getRequestProduct(for: .all) { data, responce in
-            self.productObject.products = responce
-            self.tableView.reloadData()
+        getData()
+    }
+    
+    private func getData() {
+        api.getRequestProduct(for: .all) { error, responce in
+            if !error.isEmpty {
+                let alert = UIAlertController(title: "Error".localize(tableName: DataSharing.shared.language),
+                                              message: error,
+                                              preferredStyle: .alert)
+                
+                alert.addAction(UIAlertAction(title: "Ok".localize(tableName: DataSharing.shared.language),
+                                              style: .cancel))
+                
+                self.present(alert, animated: true)
+            } else {
+                self.productViewModel.products = responce
+                self.tableView.reloadData()
+            }
         }
     }
     
-    // MARK: - Конфигурация поисковой строки SearchBar
-    private func configureSearchBar() {
-        self.view.addSubview(searchBar)
-        searchBar.placeholder = "Search"
-        searchBar.translatesAutoresizingMaskIntoConstraints = false
-        addConstraintsSearchBar()
+    private func configureSearchController() {
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search".localize(tableName: DataSharing.shared.language)
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
     }
     
-    // MARK: - Установка констрэйнтов для поисковой строки SearchBar
-    private func addConstraintsSearchBar() {
-        NSLayoutConstraint.activate([
-            searchBar.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.1),
-            searchBar.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0),
-            searchBar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0),
-            searchBar.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 60)
-        ])
+    // MARK: - Обновление количества элементов в корзине
+    func updateCartBadgeValue() {
+        let countProductCount = cartProductViewModel.cartProductDic.count
+        let item = tabBarController?.tabBar.items?[1]
+        item?.badgeValue = countProductCount > 0 ?  "\(countProductCount)" : nil
     }
     
     // MARK: - Конфигурация таблицы
@@ -51,10 +68,11 @@ extension MainVC {
     // MARK: - Установка констрэйнтов для таблицы
     private func addConstraintsTableView() {
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 8),
+            //tableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: (navigationController?.navigationBar.frame.height ?? 44) + 48),
+            tableView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 8),
             tableView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            tableView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 1),
-            tableView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.7)
+            tableView.widthAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.widthAnchor, multiplier: 1),
+            tableView.heightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.heightAnchor, multiplier: 1)
         ])
     }
 }

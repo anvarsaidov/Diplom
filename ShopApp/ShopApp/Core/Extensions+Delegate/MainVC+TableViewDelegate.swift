@@ -14,10 +14,15 @@ extension MainVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let presentVC = ProductInfoVC()
-        presentVC.productItem.append(productObject.products[indexPath.row])
+        
+        var product: Product
+        
+        product = isFiltering ? filteredProducts : productViewModel.products
+        
+        presentVC.productItem.append(product[indexPath.row])
         presentVC.cartViewModel = cartProductViewModel
-        presentVC.productObject = productObject
+        presentVC.productViewModel = productViewModel
         presentVC.vcDismis = self
-        self.present(presentVC, animated: true)
+        navigationController?.pushViewController(presentVC, animated: true)
     }
 }

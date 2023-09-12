@@ -7,31 +7,54 @@
 
 import UIKit
 
-class MainVC: UIViewController, DataTransferDelegate {
+class MainVC: UIViewController {
     
-    lazy var searchBar = UISearchBar()
+    lazy var searchController = UISearchController(searchResultsController: nil)
     lazy var tableView = UITableView()
     let indentifireCell = "TableCell"
     
     let api = ApiService()
-    var cartProductViewModel = CartProductViewModel()
-    var productObject = ProductViewModel()
     
-    lazy var categories = Categories()
+    var cartProductViewModel = CartProductViewModel() {
+        didSet {
+            updateCartBadgeValue()
+        }
+    }
+    
+    var productViewModel = ProductViewModel()
+    var filteredProducts: Product = []
+    var userViewModel = UserViewModel()
+    
+    
+    var searchBarIsEmpty: Bool {
+        guard let text = searchController.searchBar.text else { return false}
+        return !text.isEmpty
+    }
+    
+    var isFiltering: Bool {
+        return searchBarIsEmpty && searchController.isActive
+    }
     
     override func viewDidLoad() {
-        print("MainVC: ", #function)
         super.viewDidLoad()
-        self.title = NSLocalizedString("Main", comment: "")
-        self.view.backgroundColor = .white
         setup()
+        print(#function, userViewModel.isLogged)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        cartProductViewModel = DataSharing.shared.cartVM
+        productViewModel = DataSharing.shared.productVM
+        userViewModel = DataSharing.shared.userVM
     }
     
     override func viewDidAppear(_ animated: Bool) {
         tableView.reloadData()
     }
     
-    func dataTransfer(data: CartProductViewModel) {
-        cartProductViewModel = data
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        DataSharing.shared.cartVM = cartProductViewModel
+        DataSharing.shared.productVM = productViewModel
+        DataSharing.shared.userVM = userViewModel
     }
 }

@@ -11,8 +11,10 @@ extension MainVC: UITableViewDataSource {
     
     // MARK: - Задаем количество строк
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(#function, productObject.products.count)
-        return productObject.products.count
+        if isFiltering {
+            return filteredProducts.count
+        }
+        return productViewModel.products.count
     }
     
     // MARK: - Наполняем таблицу данными
@@ -21,17 +23,24 @@ extension MainVC: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: indentifireCell, for: indexPath) as? TableCell else {
             return UITableViewCell()
         }
-        cell.titleLabel.text = productObject.products[row].title
-        cell.descriptionLabel.text = productObject.products[row].description
-        cell.priceLabel.text = productObject.products[row].price.format(f: "2")
+        
+        var product: Product
+        
+        if isFiltering {
+            product = filteredProducts
+        } else {
+            product = productViewModel.products
+        }
+        
+        cell.titleLabel.text = product[row].title
+        cell.descriptionLabel.text = product[row].description
+        cell.priceLabel.text = product[row].price.format(f: "2")
         
         DispatchQueue.main.async {
-            self.productObject.api.getRequestImageProduct(for: self.productObject.products[row].image) { UIImage in
+            self.productViewModel.api.getRequestImageProduct(for: product[row].image) { UIImage in
                 cell.image.image = UIImage
             }
         }
-        
         return cell
     }
-    
 }
