@@ -48,4 +48,7 @@
 "Light" = "Light";
 "Dark" = "Dark";
 "msgIsEmptyProductCart" = "Cart is empty.";
-
+"msgBuy" = "Product purchased.";
+"EditQuantity" = "Edit quantity";
+"Quantity" = "Quantity";
+"pcs" = " pcs.";

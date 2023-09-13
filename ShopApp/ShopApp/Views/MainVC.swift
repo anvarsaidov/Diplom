@@ -38,7 +38,6 @@ class MainVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-        print(#function, userViewModel.isLogged)
     }
     
     override func viewWillAppear(_ animated: Bool) {

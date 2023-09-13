@@ -1,25 +1,27 @@
 //
-//  BasketVC+TableViewDataSource.swift
+//  HistoryVC+TableViewDataSource.swift
 //  ShopApp
 //
-//  Created by AnvarSaidov on 30.08.23.
+//  Created by AnvarSaidov on 13.09.23.
 //
 
 import UIKit.UITableView
 
-extension BasketVC: UITableViewDataSource {
+extension HistoryVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let product = cartProductVM.cartProductDic.map({$0.key})
-        return product.count
+        let idUser = userVM.idUser
+        return userVM.users[idUser].cartProductHistory.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let row = indexPath.row
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? CartTableCell else {
+        let productHistory = userVM.users[userVM.idUser].cartProductHistory
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: identifire, for: indexPath) as? CartTableCell else {
             return UITableViewCell()
         }
-        let product = cartProductVM.cartProductDic.map({$0.key})
-        let countQuantity = cartProductVM.cartProductDic.map({$0.value})
+        
+        let product = productHistory.map({$0.key})
+        let countQuantity = productHistory.map({$0.value})
         let totalPriceProduct = product[row].price * Double(countQuantity[row])
         
         cell.titleLabel.text = "\(product[row].title)"

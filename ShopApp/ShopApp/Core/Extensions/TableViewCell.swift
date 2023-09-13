@@ -20,7 +20,6 @@ extension TableCell {
         // MARK: - Конфигурируем контэйнер в виде View
     private func configureView() {
         view.translatesAutoresizingMaskIntoConstraints = false
-        //view.backgroundColor = .white
         view.layer.cornerRadius = 15
         view.clipsToBounds = true
         self.contentView.addSubview(view)

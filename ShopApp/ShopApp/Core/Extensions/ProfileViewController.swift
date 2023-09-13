@@ -320,10 +320,10 @@ extension ProfileVC {
         DataSharing.shared.language = DataSharing.shared.language == "LanguageRussian" ? "LanguageEnglish" : "LanguageRussian"
         setImageLangButton()
         
-        if let window = UIApplication.shared.keyWindow {
-            DataSharing.shared.userVM = userVM
-            window.rootViewController = StartVC()
-        }
+        let scenes = UIApplication.shared.connectedScenes
+        let windowScene = scenes.first as? UIWindowScene
+        guard let window = windowScene?.windows.first as? UIWindow else { return }
+        window.rootViewController = StartVC()
     }
     
     @objc

@@ -55,6 +55,9 @@
 		42B49A3C2AB04367004F0308 /* RegistrationVC+TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B49A3B2AB04367004F0308 /* RegistrationVC+TextField.swift */; };
 		42B49A402AB07A55004F0308 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B49A3F2AB07A55004F0308 /* Theme.swift */; };
 		42B49A422AB07CD9004F0308 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B49A412AB07CD9004F0308 /* AppTheme.swift */; };
+		42B49A442AB1A05A004F0308 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B49A432AB1A05A004F0308 /* HistoryViewController.swift */; };
+		42B49A462AB1A0EB004F0308 /* HistoryVC+TableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B49A452AB1A0EB004F0308 /* HistoryVC+TableViewDelegate.swift */; };
+		42B49A482AB1A14A004F0308 /* HistoryVC+TableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B49A472AB1A14A004F0308 /* HistoryVC+TableViewDataSource.swift */; };
 		42ECD7882A72F4BE007B2105 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42ECD7872A72F4BE007B2105 /* AppDelegate.swift */; };
 		42ECD78A2A72F4BE007B2105 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42ECD7892A72F4BE007B2105 /* SceneDelegate.swift */; };
 		42ECD78C2A72F4BE007B2105 /* WelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42ECD78B2A72F4BE007B2105 /* WelcomeVC.swift */; };
@@ -113,6 +116,9 @@
 		42B49A3B2AB04367004F0308 /* RegistrationVC+TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RegistrationVC+TextField.swift"; sourceTree = "<group>"; };
 		42B49A3F2AB07A55004F0308 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		42B49A412AB07CD9004F0308 /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
+		42B49A432AB1A05A004F0308 /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
+		42B49A452AB1A0EB004F0308 /* HistoryVC+TableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HistoryVC+TableViewDelegate.swift"; sourceTree = "<group>"; };
+		42B49A472AB1A14A004F0308 /* HistoryVC+TableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HistoryVC+TableViewDataSource.swift"; sourceTree = "<group>"; };
 		42ECD7842A72F4BE007B2105 /* ShopApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShopApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42ECD7872A72F4BE007B2105 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		42ECD7892A72F4BE007B2105 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -149,6 +155,7 @@
 				42B49A392AB0432B004F0308 /* LoginVC+TextField.swift */,
 				42B49A3B2AB04367004F0308 /* RegistrationVC+TextField.swift */,
 				422B5D5B2A9F5CE000DA259D /* EditUserVC+TextField.swift */,
+				42B49A452AB1A0EB004F0308 /* HistoryVC+TableViewDelegate.swift */,
 			);
 			path = "Extensions+Delegate";
 			sourceTree = "<group>";
@@ -158,6 +165,7 @@
 			children = (
 				422B5D332A93723700DA259D /* MainVC+TableViewDataSource.swift */,
 				422B5D6B2A9FC4E000DA259D /* BasketVC+TableViewDataSource.swift */,
+				42B49A472AB1A14A004F0308 /* HistoryVC+TableViewDataSource.swift */,
 			);
 			path = "Extensions+DataSource";
 			sourceTree = "<group>";
@@ -285,6 +293,7 @@
 				42B49A0C2AA86D8E004F0308 /* StartVC.swift */,
 				42B49A1C2AA9ECE0004F0308 /* MainVC+SearchResultUpdating.swift */,
 				42B49A222AAA5EF0004F0308 /* EditUserViewController.swift */,
+				42B49A432AB1A05A004F0308 /* HistoryViewController.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -409,10 +418,13 @@
 				422B5D2A2A92AEE000DA259D /* Product.swift in Sources */,
 				422B5D1B2A90BC7000DA259D /* ProfileVC.swift in Sources */,
 				422B5D532A9E6A8F00DA259D /* EndPointRequest.swift in Sources */,
+				42B49A442AB1A05A004F0308 /* HistoryViewController.swift in Sources */,
 				422B5D402A97418A00DA259D /* TableCell.swift in Sources */,
 				422B5D5C2A9F5CE000DA259D /* EditUserVC+TextField.swift in Sources */,
+				42B49A462AB1A0EB004F0308 /* HistoryVC+TableViewDelegate.swift in Sources */,
 				422B5D152A90A7A600DA259D /* MainVC.swift in Sources */,
 				422B5D5E2A9FA73900DA259D /* User.swift in Sources */,
+				42B49A482AB1A14A004F0308 /* HistoryVC+TableViewDataSource.swift in Sources */,
 				42B49A422AB07CD9004F0308 /* AppTheme.swift in Sources */,
 				422B5D202A91435700DA259D /* BasketViewController.swift in Sources */,
 				42B49A1B2AA8EF64004F0308 /* DataSharing.swift in Sources */,

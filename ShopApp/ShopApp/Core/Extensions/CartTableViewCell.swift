@@ -19,7 +19,6 @@ extension CartTableCell {
     
     private func configureView() {
         view.translatesAutoresizingMaskIntoConstraints = false
-        //view.backgroundColor = .white
         view.layer.cornerRadius = 15
         view.clipsToBounds = true
         self.contentView.addSubview(view)
@@ -79,7 +78,6 @@ extension CartTableCell {
     
     // MARK: - Задаем констрэйнты для посля с описанием
     private func addConstraintsDescriptionLabel() {
-        
         NSLayoutConstraint.activate([
             descriptionLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 8),
             descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16),

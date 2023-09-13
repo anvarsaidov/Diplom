@@ -10,14 +10,11 @@ import UIKit
 extension MainVC {
     
     func setup() {
-        
         self.title = "Main".localize(tableName: DataSharing.shared.language)
         self.view.backgroundColor = UIColor(named: "backgroundColor")
         self.navigationController?.navigationBar.backgroundColor = UIColor(named: "backgroundColor")
-        
         configureSearchController()
         configureTableView()
-        
         getData()
     }
     
@@ -56,6 +53,11 @@ extension MainVC {
     
     // MARK: - Конфигурация таблицы
     private func configureTableView() {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        tableView.refreshControl = refreshControl
+        
+        
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(TableCell.self, forCellReuseIdentifier: indentifireCell)
         tableView.delegate = self
@@ -74,5 +76,11 @@ extension MainVC {
             tableView.widthAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.widthAnchor, multiplier: 1),
             tableView.heightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.heightAnchor, multiplier: 1)
         ])
+    }
+    
+    @objc
+    private func refreshData() {
+        getData()
+        tableView.refreshControl?.endRefreshing()
     }
 }

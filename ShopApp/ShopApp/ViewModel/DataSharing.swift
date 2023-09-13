@@ -9,7 +9,9 @@ import UIKit
 
 final class DataSharing {
     static var shared = DataSharing()
+    
     let defaults = UserDefaults.standard
+    
     var productVM = ProductViewModel()
     var cartVM = CartProductViewModel()
     var userVM = UserViewModel()

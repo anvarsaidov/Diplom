@@ -9,7 +9,34 @@ import UIKit.UITableView
 
 extension BasketVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let keys = Array(cartProductVM.cartProductDic.keys)[indexPath.row]
+        guard let productItem = cartProductVM.cartProductDic[keys] else { return }
         
+        let alert = UIAlertController(title: "EditQuantity".localize(tableName: DataSharing.shared.language),
+                                      message: "",
+                                      preferredStyle: .alert)
+        alert.addTextField { UITextField in
+            UITextField.placeholder = "Quantity".localize(tableName: DataSharing.shared.language)
+            UITextField.text = "\(String(describing: productItem))"
+            UITextField.keyboardType = .numberPad
+        }
+        
+        alert.addAction(UIAlertAction(title: "Accept".localize(tableName: DataSharing.shared.language),
+                                      style: UIAlertAction.Style.default,
+                                      handler: { UIAlertAction in
+            guard let countText = alert.textFields?[0].text else { return }
+            if let count = Int(countText), count > 0 {
+                self.cartProductVM.cartProductDic[keys] = Int(count)
+            } else {
+                self.cartProductVM.cartProductDic[keys] = 1
+            }
+            self.updateTotalPriceLabel()
+            self.tableView.reloadData()
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel".localize(tableName: DataSharing.shared.language),
+                                      style: .cancel))
+        self.present(alert, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -30,6 +57,4 @@ extension BasketVC: UITableViewDelegate {
             })
         ])
     }
-    
-    
 }

@@ -15,15 +15,15 @@ class CartTableCell: UITableViewCell {
     lazy var descriptionLabel = UILabel()
     lazy var priceLabel = UILabel()
     lazy var countQuantityLabel = UILabel()
+    lazy var minusBut = UIButton()
+    lazy var plusBut = UIButton()
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        setupCell()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        // Configure the view for the selected state
         setupCell()
     }
     

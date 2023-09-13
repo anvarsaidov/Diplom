@@ -7,9 +7,10 @@
 
 import UIKit
 
-final class ApiService: UIAlertController {
+final class ApiService {
     
     static let shared = ApiService()
+    
     private let baseUrl = "https://fakestoreapi.com/"
     private let session = URLSession.shared
     var errorMsg = ""

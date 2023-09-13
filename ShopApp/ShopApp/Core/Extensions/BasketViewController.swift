@@ -103,6 +103,13 @@ extension BasketVC {
                         tableView.reloadData()
                         updateBadge(count: count)
                         updateTotalPriceLabel()
+                        
+                        let alert = UIAlertController(title: "titleAlertLogIn".localize(tableName: DataSharing.shared.language),
+                                                      message: "msgBuy".localize(tableName: DataSharing.shared.language),
+                                                      preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Ok".localize(tableName: DataSharing.shared.language),
+                                                      style: .cancel))
+                        self.present(alert, animated: true)
                     }
                 }
             }

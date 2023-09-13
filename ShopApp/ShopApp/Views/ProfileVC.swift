@@ -38,14 +38,13 @@ class ProfileVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-        let user = User(id: 1, userName: "Qwe", password: "qweqwe", firstName: "qwe", lastName: "qwe", email: "qwe@qwe.qw", cartProductHistory: [:])
-        let _ = userVM.addUser(for: user)
-        DataSharing.shared.userVM = userVM
+//        let user = User(id: 1, userName: "Qwe", password: "qweqwe", firstName: "qwe", lastName: "qwe", email: "qwe@qwe.qw", cartProductHistory: [:])
+//        let _ = userVM.addUser(for: user)
+//        DataSharing.shared.userVM = userVM
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         updateVC()
         userVM = DataSharing.shared.userVM
         cartViewModel = DataSharing.shared.cartVM

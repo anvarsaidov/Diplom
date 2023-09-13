@@ -48,3 +48,7 @@
 "Light" = "Светлая";
 "Dark" = "Темная";
 "msgIsEmptyProductCart" = "Корзина пуста.";
+"msgBuy" = "Товар куплен.";
+"EditQuantity" = "Редактирование количества";
+"Quantity" = "Количество";
+"pcs" = " шт.";

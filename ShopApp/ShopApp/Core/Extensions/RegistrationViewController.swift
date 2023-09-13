@@ -285,11 +285,8 @@ extension RegistrationVC {
                     vc.exitButton.isHidden = false
                     self.navigationController?.viewControllers = [vc]
                 }
-                
             }
         }))
-        
-        
         self.present(alert, animated: true)
     }
 
